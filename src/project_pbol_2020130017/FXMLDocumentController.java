@@ -22,8 +22,8 @@ public class FXMLDocumentController implements Initializable {
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
-        System.out.println("Fuck You");
-        label.setText("Nigga~");
+        System.out.println("Fuck You Bitch 69");
+        label.setText("Nigga~~~");
     }
     
     @Override
