@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="optionPane" fx:id="optionPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Menu.FXML_OptionController">
+   <children>
+      <ImageView fx:id="imageVolume" fitHeight="150.0" fitWidth="200.0" layoutX="300.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Volume.png" />
+         </image>
+      </ImageView>
+      <Slider fx:id="sliderVolume" layoutX="363.0" layoutY="137.0" prefHeight="54.0" prefWidth="275.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+      <Label fx:id="labelVolume" layoutX="700.0" layoutY="141.0" text="100">
+         <font>
+            <Font name="Comic Sans MS" size="16.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imageBack" fitHeight="63.0" fitWidth="177.0" layoutX="563.0" layoutY="475.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnBack" layoutX="563.0" layoutY="475.0" mnemonicParsing="false" onAction="#backKlik" opacity="0.0" prefHeight="63.0" prefWidth="164.0" text="Button" />
+   </children>
+</AnchorPane>
