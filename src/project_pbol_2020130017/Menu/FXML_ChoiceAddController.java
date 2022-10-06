@@ -1,0 +1,124 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ */
+package project_pbol_2020130017.Menu;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+
+/**
+ * FXML Controller class
+ *
+ * @author acer
+ */
+public class FXML_ChoiceAddController implements Initializable {
+
+    @FXML
+    private AnchorPane choicePane;
+    @FXML
+    private ImageView imageRace;
+    @FXML
+    private ImageView imageClass;
+    @FXML
+    private ImageView imageTanda;
+    @FXML
+    private ImageView imageBack;
+    @FXML
+    private Button btnRace;
+    @FXML
+    private Button btnClass;
+    @FXML
+    private Button btnTanda;
+    @FXML
+    private Button btnBack;
+
+    /**
+     * Initializes the controller class.
+     */
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+
+    @FXML
+    private void raceKlik(ActionEvent event) throws IOException {
+        System.out.println("Add Race");
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddRas.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        
+        String css = this.getClass().getResource("/project_pbol_2020130017/Add/Style3.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void classKlik(ActionEvent event) throws IOException {
+        System.out.println("Add Kelas");
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddKelas.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        
+        String css = this.getClass().getResource("/project_pbol_2020130017/Add/Style3.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void tandaKlik(ActionEvent event) throws IOException {
+        System.out.println("Add Tanda");
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddTanda.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        
+        String css = this.getClass().getResource("/project_pbol_2020130017/Add/Style3.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    private void backKlik(ActionEvent event) throws IOException {
+        System.out.println("Go Back");
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Menu/FXML_Choice.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        
+        String css = this.getClass().getResource("/project_pbol_2020130017/Menu/Style.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
+    
+}

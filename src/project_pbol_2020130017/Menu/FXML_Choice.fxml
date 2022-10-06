@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1">
-    
+
+<AnchorPane id="choicePane" fx:id="choicePane" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="project_pbol_2020130017.Menu.FXML_ChoiceController">
+   <children>
+      <ImageView fx:id="imageCreate" fitHeight="77.0" fitWidth="367.0" layoutX="47.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Create%20Hero.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageAdd" fitHeight="57.0" fitWidth="416.0" layoutX="47.0" layoutY="248.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Add%20My%20Creation.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="imageBack" fitHeight="57.0" fitWidth="169.0" layoutX="47.0" layoutY="481.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Back.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="btnCreate" layoutX="47.0" layoutY="88.0" mnemonicParsing="false" onAction="#createKlik" opacity="0.0" prefHeight="51.0" prefWidth="367.0" text="Button" />
+      <Button fx:id="btnAdd" layoutX="47.0" layoutY="248.0" mnemonicParsing="false" onAction="#addKlik" opacity="0.0" prefHeight="51.0" prefWidth="416.0" text="Button" />
+      <Button fx:id="btnBack" layoutX="54.0" layoutY="481.0" mnemonicParsing="false" onAction="#backKlik" opacity="0.0" prefHeight="51.0" prefWidth="141.0" text="Button" />
+   </children>
 </AnchorPane>

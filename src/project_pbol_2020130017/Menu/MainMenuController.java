@@ -61,6 +61,24 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private void startKlik(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_Choice.fxml"));
+            Parent root = (Parent)loader.load();
+            FXML_ChoiceController isidt = (FXML_ChoiceController)loader.getController();
+            Scene scene = new Scene(root);
+            Stage stg = new Stage();
+            
+            String css = this.getClass().getResource("Style.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            
+            stg.initModality(Modality.APPLICATION_MODAL);
+            stg.setResizable(false);
+            stg.setIconified(false);
+            stg.setScene(scene);
+            stg.showAndWait();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     @FXML

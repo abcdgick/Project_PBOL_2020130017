@@ -13,3 +13,11 @@
     -fx-background-position: center center;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
 }
+
+#choicePane{
+    -fx-background-image: url("Choice.png");
+    -fx-background-repeat: no-repeat;   
+    -fx-background-size: 1000 600;
+    -fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+}
