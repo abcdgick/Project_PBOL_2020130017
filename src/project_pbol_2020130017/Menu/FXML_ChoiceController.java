@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import static project_pbol_2020130017.Main.stageMenu;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 
 /**
@@ -53,6 +54,8 @@ public class FXML_ChoiceController implements Initializable {
     @FXML
     private void createKlik(ActionEvent event) throws IOException {
         System.out.println("Create");
+        
+        stageMenu.close();
         
         mediaPlayer.stop();
         

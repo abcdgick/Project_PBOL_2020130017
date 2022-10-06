@@ -18,6 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import static project_pbol_2020130017.Main.stageMenu;
+import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 
 /**
  * FXML Controller class
@@ -55,7 +57,10 @@ public class FXML_ChoiceAddController implements Initializable {
 
     @FXML
     private void raceKlik(ActionEvent event) throws IOException {
+        
+        
         System.out.println("Add Race");
+        stopMenu();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddRas.fxml"));
         Parent root = loader.load();
@@ -74,6 +79,8 @@ public class FXML_ChoiceAddController implements Initializable {
     private void classKlik(ActionEvent event) throws IOException {
         System.out.println("Add Kelas");
         
+        stopMenu();
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddKelas.fxml"));
         Parent root = loader.load();
         
@@ -90,6 +97,8 @@ public class FXML_ChoiceAddController implements Initializable {
     @FXML
     private void tandaKlik(ActionEvent event) throws IOException {
         System.out.println("Add Tanda");
+        
+        stopMenu();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddTanda.fxml"));
         Parent root = loader.load();
@@ -119,6 +128,11 @@ public class FXML_ChoiceAddController implements Initializable {
         
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void stopMenu() {
+        stageMenu.close();
+        mediaPlayer.stop();
     }
     
 }

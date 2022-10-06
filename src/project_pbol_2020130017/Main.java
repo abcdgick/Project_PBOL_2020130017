@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     
     public static double volume;
+    public static Stage stageMenu;
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -33,6 +34,7 @@ public class Main extends Application {
         
         stage.setScene(scene);
         stage.show();
+        stageMenu = stage;
         stage.setOnCloseRequest(event -> {
             event.consume();
             quit(stage);

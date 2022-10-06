@@ -31,7 +31,7 @@ import javafx.stage.Stage;
  */
 public class MainMenuController implements Initializable {
 
-    private Media music;
+    public static Media music;
     public static MediaPlayer mediaPlayer;
     
     @FXML
@@ -50,6 +50,7 @@ public class MainMenuController implements Initializable {
     private Button btnOption;
     @FXML
     private Button btnExit;
+    
 
     /**
      * Initializes the controller class.
@@ -127,4 +128,5 @@ public class MainMenuController implements Initializable {
         //mediaPlayer.play();
         mediaView.setMediaPlayer(mediaPlayer);
     }
+    
 }
