@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="createPane" fx:id="createPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Create.FXML_ListHeroController">
+   <children>
+      <Button fx:id="btnNew" layoutX="850.0" layoutY="60.0" mnemonicParsing="false" onAction="#newKlik" text="New Hero" />
+      <Button fx:id="btnEdit" layoutX="850.0" layoutY="140.0" mnemonicParsing="false" onAction="#editKlik" text="Edit Hero" />
+      <Button fx:id="btnExitHero" layoutX="827.0" layoutY="540.0" mnemonicParsing="false" onAction="#exitHeroKlik" text="Exit Hero Creation" />
+      <TableView fx:id="listHero" layoutX="14.0" layoutY="14.0" prefHeight="570.0" prefWidth="770.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnDelete" layoutX="845.0" layoutY="220.0" mnemonicParsing="false" onAction="#deleteKlik" text="Delete Hero" />
+   </children>
+</AnchorPane>

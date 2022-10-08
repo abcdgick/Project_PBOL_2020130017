@@ -6,6 +6,8 @@ package project_pbol_2020130017.DB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
@@ -78,6 +80,24 @@ public class DBKelas {
             con.tutupKoneksi();
             return tableData;
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public ObservableList<String> getIDKelas(){
+        try {
+            ObservableList<String> listID = FXCollections.observableArrayList();
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("Select IDKelas from kelas");
+            while(rs.next()){
+                listID.add(rs.getString("IDKelas"));
+            }
+            con.tutupKoneksi();
+            return listID;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             return null;
         }
     }
@@ -232,6 +252,7 @@ public class DBKelas {
         }
     }
     
+    //nanti panggilnya, pake = contoh: "= 'dis'"
     public ObservableList<KelasModel> basedOf(String based){
         try {
             ObservableList<KelasModel> tableData = FXCollections.observableArrayList();
@@ -242,7 +263,7 @@ public class DBKelas {
                     + "minStr, minAgi, minDex, minCon, minInt, minWis, minLuck, "
                     + "maxStr, maxAgi, maxDex, maxCon, maxInt, maxWis, maxLuck, "
                     + "addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit "
-                    + "from kelas where basedOf = '"+based+"'");
+                    + "from kelas where basedOf "+based);
             int i = 1;
             while(rs.next()){
                 KelasModel d = new KelasModel();
@@ -288,5 +309,21 @@ public class DBKelas {
         } catch (Exception e) {
             return null;
         }
+    }
+    
+    public String isKelasDasar(String ID){
+        try {
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("select basedOf from kelas where IDKelas = '" +ID+ "'");
+            while(rs.next()) {
+                return rs.getString("basedOf");
+            }
+            con.tutupKoneksi();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

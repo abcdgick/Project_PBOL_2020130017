@@ -1,12 +1,197 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="addPane" fx:id="addPane" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-    
+<AnchorPane id="addPane" fx:id="addPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Add.FXML_AddKelasController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000033" height="550.0" layoutX="25.0" layoutY="25.0" opacity="0.06" stroke="TRANSPARENT" strokeType="INSIDE" width="950.0" />
+      <Label layoutX="399.0" layoutY="80.0" text="Class Name">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="399.0" layoutY="40.0" text="Class ID">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="140.0" text="Add HP">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="170.0" text="Add MP">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="200.0" text="Add Physical Attack">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="230.0" text="Add Physical Defence">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="380.0" text="Add Stamina Regen">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="320.0" text="Add Attack Speed">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="260.0" text="Add Magical Attack">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="290.0" text="Add Magical Defence">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="350.0" text="Add Stamina">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="410.0" text="Add MP Regen">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="50.0" layoutY="440.0" text="Add Crit Chance">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtAddHP" layoutX="270.0" layoutY="140.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddPAtk" layoutX="270.0" layoutY="200.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddPDef" layoutX="270.0" layoutY="230.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddMAtk" layoutX="270.0" layoutY="260.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddAtkS" layoutX="270.0" layoutY="320.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddSta" layoutX="270.0" layoutY="350.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddStaR" layoutX="270.0" layoutY="380.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddMPR" layoutX="270.0" layoutY="410.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddCrit" layoutX="270.0" layoutY="440.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtAddMP" layoutX="270.0" layoutY="170.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinAgi" layoutX="585.0" layoutY="170.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinLuck" layoutX="585.0" layoutY="320.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinWis" layoutX="585.0" layoutY="290.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinInt" layoutX="585.0" layoutY="260.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinCon" layoutX="585.0" layoutY="230.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinDex" layoutX="585.0" layoutY="200.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMinStr" layoutX="585.0" layoutY="140.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="390.0" layoutY="320.0" text="Min Luck">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="260.0" text="Min Intelligence">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="290.0" text="Min Wisdom">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="230.0" text="Min Constitution">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="200.0" text="Min Dexterity">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="170.0" text="Min Agility">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="390.0" layoutY="140.0" text="Min Strength">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="140.0" text="Max Strength">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="170.0" text="Max Agility">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="200.0" text="Max Dexterity">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="230.0" text="Max Constitution">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="290.0" text="Max Wisdom">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="260.0" text="Max Intelligence">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="702.0" layoutY="320.0" text="Max Luck">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtMaxStr" layoutX="897.0" layoutY="140.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMaxDex" layoutX="897.0" layoutY="200.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMaxCon" layoutX="897.0" layoutY="230.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMaxInt" layoutX="897.0" layoutY="260.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMaxWis" layoutX="897.0" layoutY="290.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMaxLuck" layoutX="897.0" layoutY="320.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtMaxAgi" layoutX="897.0" layoutY="170.0" prefHeight="25.0" prefWidth="50.0" />
+      <Button fx:id="btnAddClass" layoutX="270.0" layoutY="517.0" mnemonicParsing="false" onAction="#addClassKlik" text="Add Class" />
+      <Button fx:id="btnExit" layoutX="585.0" layoutY="517.0" mnemonicParsing="false" onAction="#exitKlik" text="Exit" />
+      <TextField fx:id="txtClassID" layoutX="536.0" layoutY="40.0" />
+      <TextField fx:id="txtClassName" layoutX="536.0" layoutY="80.0" />
+      <TextField fx:id="txtAddMDef" layoutX="270.0" layoutY="290.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="434.0" layoutY="448.0" text="Class Detail">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtClassDetail" layoutX="581.0" layoutY="441.0" prefHeight="40.0" prefWidth="365.0" />
+      <Label layoutX="390.0" layoutY="381.0" text="Skill">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="610.0" layoutY="380.0" text="Skill Detail">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtSkillDetail" layoutX="715.0" layoutY="359.0" prefHeight="66.0" prefWidth="231.0" />
+      <TextField fx:id="txtSkill" layoutX="439.0" layoutY="381.0" />
+   </children>
 </AnchorPane>

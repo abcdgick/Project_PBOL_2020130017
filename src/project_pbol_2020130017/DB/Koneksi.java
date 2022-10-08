@@ -25,7 +25,7 @@ public class Koneksi {
     public void bukaKoneksi(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
-            dbKoneksi = DriverManager.getConnection("jdbc:mysql://localhost:3306/pbol?user=root&password=root");
+            dbKoneksi = DriverManager.getConnection("jdbc:mysql://localhost:3306/project?user=root&password=root");
         } catch (Exception e){
             e.printStackTrace();
         }

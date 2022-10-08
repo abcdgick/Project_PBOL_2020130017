@@ -62,7 +62,7 @@ public class FXML_ChoiceAddController implements Initializable {
         System.out.println("Add Race");
         stopMenu();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddRas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListRas.fxml"));
         Parent root = loader.load();
         
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -81,7 +81,7 @@ public class FXML_ChoiceAddController implements Initializable {
         
         stopMenu();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddKelas.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListKelas.fxml"));
         Parent root = loader.load();
         
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -100,7 +100,7 @@ public class FXML_ChoiceAddController implements Initializable {
         
         stopMenu();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_AddTanda.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListTanda.fxml"));
         Parent root = loader.load();
         
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

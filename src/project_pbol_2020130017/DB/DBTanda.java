@@ -5,6 +5,7 @@
 package project_pbol_2020130017.DB;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -57,6 +58,24 @@ public class DBTanda {
             con.tutupKoneksi();
             return tableData;
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public ObservableList<String> getIDTanda(){
+        try {
+            ObservableList<String> listID = FXCollections.observableArrayList();
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("Select IDTanda from tanda");
+            while(rs.next()){
+                listID.add(rs.getString("IDTanda"));
+            }
+            con.tutupKoneksi();
+            return listID;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             return null;
         }
     }

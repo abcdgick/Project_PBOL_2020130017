@@ -1,12 +1,101 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="addPane" fx:id="addPane" prefHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
-    
+<AnchorPane id="addPane" fx:id="addPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Add.FXML_AddTandaController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000033" height="550.0" layoutX="25.0" layoutY="25.0" opacity="0.06" stroke="TRANSPARENT" strokeType="INSIDE" width="950.0" />
+      <Label layoutX="399.0" layoutY="80.0" text="Birthsign Name Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="399.0" layoutY="40.0" text="Birthsign ID Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="199.0" prefHeight="0.0" text="HP Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="239.0" text="MP Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="279.0" text="Physical Attack Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="319.0" text="Physical Defence Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="307.0" text="Stamina Regen Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="227.0" text="Attack Speed Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="359.0" text="Magical Attack Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="399.0" text="Magical Defence Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="267.0" text="Stamina Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="347.0" text="MP Regen Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="581.0" layoutY="387.0" text="Crit Chance Buff">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtBuffHP" layoutX="369.0" layoutY="199.0" prefHeight="0.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffPAtk" layoutX="369.0" layoutY="279.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffPDef" layoutX="369.0" layoutY="319.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffMAtk" layoutX="369.0" layoutY="359.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffAtkS" layoutX="801.0" layoutY="227.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffSta" layoutX="801.0" layoutY="267.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffStaR" layoutX="801.0" layoutY="307.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffMPR" layoutX="801.0" layoutY="347.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffCrit" layoutX="801.0" layoutY="387.0" prefHeight="25.0" prefWidth="50.0" />
+      <TextField fx:id="txtBuffMP" layoutX="369.0" layoutY="239.0" prefHeight="25.0" prefWidth="50.0" />
+      <Button fx:id="btnAddBirthsign" layoutX="270.0" layoutY="517.0" mnemonicParsing="false" onAction="#addBirthsignKlik" text="Birthsign" />
+      <Button fx:id="btnExit" layoutX="585.0" layoutY="517.0" mnemonicParsing="false" onAction="#exitKlik" text="Exit" />
+      <TextField fx:id="txtBirthsignID" layoutX="536.0" layoutY="40.0" />
+      <TextField fx:id="txtBirthsignName" layoutX="536.0" layoutY="80.0" />
+      <TextField fx:id="txtBuffMDef" layoutX="369.0" layoutY="399.0" prefHeight="25.0" prefWidth="50.0" />
+      <Label layoutX="280.0" layoutY="127.0" text="Birthsign Detail">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="txtBirthsignDetail" layoutX="427.0" layoutY="120.0" prefHeight="40.0" prefWidth="365.0" />
+   </children>
 </AnchorPane>

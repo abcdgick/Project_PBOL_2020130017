@@ -59,7 +59,7 @@ public class FXML_ChoiceController implements Initializable {
         
         mediaPlayer.stop();
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Create/FXML_CreateHero.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Create/FXML_ListHero.fxml"));
         Parent root = loader.load();
         
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
