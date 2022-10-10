@@ -11,47 +11,47 @@
 <AnchorPane id="addPane" fx:id="addPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Add.FXML_AddRasController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#000033" height="550.0" layoutX="25.0" layoutY="25.0" opacity="0.06" stroke="TRANSPARENT" strokeType="INSIDE" width="950.0" />
-      <Label layoutX="399.0" layoutY="80.0" text="Race Name">
+      <Label layoutX="399.0" layoutY="80.0" text="Race Name" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="399.0" layoutY="40.0" text="Race ID">
+      <Label layoutX="399.0" layoutY="40.0" text="Race ID" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="160.0" layoutY="160.0" text="Base Strength">
+      <Label layoutX="160.0" layoutY="160.0" text="Base Strength" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="160.0" layoutY="220.0" text="Base Agility">
+      <Label layoutX="160.0" layoutY="220.0" text="Base Agility" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="160.0" layoutY="280.0" text="Base Dexterity">
+      <Label layoutX="160.0" layoutY="280.0" text="Base Dexterity" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="160.0" layoutY="340.0" text="Base Constitution">
+      <Label layoutX="160.0" layoutY="340.0" text="Base Constitution" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="620.0" layoutY="248.0" text="Base Wisdom">
+      <Label layoutX="620.0" layoutY="248.0" text="Base Wisdom" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="620.0" layoutY="188.0" text="Base Intelligence">
+      <Label layoutX="620.0" layoutY="188.0" text="Base Intelligence" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="620.0" layoutY="308.0" text="Base Luck">
+      <Label layoutX="620.0" layoutY="308.0" text="Base Luck" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
@@ -63,8 +63,8 @@
       <TextField fx:id="txtBaseWis" layoutX="811.0" layoutY="248.0" prefHeight="25.0" prefWidth="50.0" />
       <TextField fx:id="txtBaseLuck" layoutX="811.0" layoutY="308.0" prefHeight="25.0" prefWidth="50.0" />
       <TextField fx:id="txtBaseAgi" layoutX="349.0" layoutY="220.0" prefHeight="25.0" prefWidth="50.0" />
-      <Button fx:id="btnAddRace" layoutX="270.0" layoutY="517.0" mnemonicParsing="false" onAction="#addRaceKlik" text="Add Race" />
-      <Button fx:id="btnExit" layoutX="585.0" layoutY="517.0" mnemonicParsing="false" onAction="#exitKlik" text="Exit" />
+      <Button id="btnCreate" fx:id="btnAddRace" layoutX="204.0" layoutY="498.0" mnemonicParsing="false" onAction="#addRaceKlik" prefHeight="44.0" prefWidth="133.0" text="Add Race" />
+      <Button id="btnKeluar" fx:id="btnExit" layoutX="585.0" layoutY="496.0" mnemonicParsing="false" onAction="#exitKlik" prefHeight="44.0" prefWidth="81.0" text="Exit" />
       <TextField fx:id="txtRaceID" layoutX="536.0" layoutY="40.0" />
       <TextField fx:id="txtRaceName" layoutX="536.0" layoutY="80.0" />
    </children>

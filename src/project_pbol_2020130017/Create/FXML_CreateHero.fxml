@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="createPane" fx:id="createPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Create.FXML_CreateHeroController">
+<AnchorPane id="CreatePane" fx:id="createPane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Create.FXML_CreateHeroController">
    <children>
       <ImageView fx:id="imageView" fitHeight="400.0" fitWidth="400.0" layoutX="52.0" layoutY="106.0" pickOnBounds="true">
          <image>
@@ -57,8 +57,8 @@
             <Font name="Comic Sans MS Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnCreateHero" layoutX="556.0" layoutY="556.0" mnemonicParsing="false" onAction="#createHeroKlik" text="Create Hero" />
-      <Button fx:id="btnQuitHero" layoutX="909.0" layoutY="556.0" mnemonicParsing="false" onAction="#quitHeroKlik" text="Quit" />
+      <Button id="btnCreate" fx:id="btnCreateHero" layoutX="516.0" layoutY="548.0" mnemonicParsing="false" onAction="#createHeroKlik" prefHeight="33.0" prefWidth="149.0" text="Create Hero" />
+      <Button id="btnKeluar" fx:id="btnQuitHero" layoutX="909.0" layoutY="548.0" mnemonicParsing="false" onAction="#quitHeroKlik" prefHeight="33.0" prefWidth="72.0" text="Quit" />
       <ImageView fitHeight="36.0" fitWidth="33.0" layoutX="651.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Left%20Arrow.png" />

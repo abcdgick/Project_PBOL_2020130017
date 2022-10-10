@@ -36,3 +36,66 @@
     -fx-border-width: 3;
     -fx-rotate: 10;
 }
+
+#btnCreate {
+    -fx-font-weight: bold;
+    -fx-background-color: #2e7d43;
+    -fx-background-radius: 22;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+}
+
+#btnCreate:hover{
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-font-size: 18;
+    -fx-text-fill: #2e7d43;
+    -fx-text-border-color: #2e7d43;
+    -fx-border-radius: 20;
+    -fx-border-width: 3;
+}
+
+#btnCreate:pressed{
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-font-size: 18;
+    -fx-text-fill: #2e7d43;
+    -fx-text-border-color: #2e7d43;
+    -fx-border-radius: 20;
+    -fx-border-width: 3;
+    -fx-rotate: 10;
+}
+
+
+#btnKeluar {
+    -fx-font-weight: bold;
+    -fx-background-color: #b53131;
+    -fx-background-radius: 22;
+    -fx-font-size: 16;
+    -fx-text-fill: white;
+}
+
+#btnKeluar:hover{
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-font-size: 18;
+    -fx-text-fill: #b53131;
+    -fx-text-border-color: #b53131;
+    -fx-border-radius: 20;
+    -fx-border-width: 3;
+}
+
+#btnKeluar:pressed{
+    -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-background-radius: 22;
+    -fx-font-size: 18;
+    -fx-text-fill: #2e7d43;
+    -fx-text-border-color: #b53131;
+    -fx-border-radius: 20;
+    -fx-border-width: 3;
+    -fx-rotate: 10;
+}

@@ -69,6 +69,10 @@ public class FXML_ListKelasController implements Initializable {
             FXML_AddKelasController isidt = (FXML_AddKelasController)loader.getController();
             Scene scene = new Scene(root);
             Stage stg = new Stage();
+            
+            String css = this.getClass().getResource("Style3.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            
             stg.initModality(Modality.APPLICATION_MODAL);
             stg.setResizable(false);
             stg.setIconified(false);
@@ -94,6 +98,10 @@ public class FXML_ListKelasController implements Initializable {
                 isidt.udahAda(s);
                 Scene scene = new Scene(root);
                 Stage stg = new Stage();
+                
+                String css = this.getClass().getResource("Style3.css").toExternalForm();
+                scene.getStylesheets().add(css);
+                
                 stg.initModality(Modality.APPLICATION_MODAL);
                 stg.setResizable(false);
                 stg.setIconified(false);

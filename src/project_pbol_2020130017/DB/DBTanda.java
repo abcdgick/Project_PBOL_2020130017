@@ -156,7 +156,7 @@ public class DBTanda {
         try {
             con.bukaKoneksi();
             con.preparedStatement = con.dbKoneksi.prepareStatement("update tanda set "
-                    + "namaTanda=?, detilTanda=? "
+                    + "namaTanda=?, detilTanda=?, "
                     + "buffHP=?, buffMP=?, buffPAtk=?, buffPDef=?, buffMAtk=?, buffMDef=?, buffAtkS=?, buffSta=?, buffStaR=?, buffMPR=?, buffCrit=? "
                     + "where IDTanda = ?");
             

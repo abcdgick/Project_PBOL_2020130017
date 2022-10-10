@@ -100,7 +100,7 @@ public class FXML_AddRasController implements Initializable {
             }
         } else if(MainMenuController.dtRas.validasi(n.getIDRas())<=0){
             if(MainMenuController.dtRas.insert()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION,"New class has been created!",ButtonType.OK);
+                Alert a = new Alert(Alert.AlertType.INFORMATION,"New race has been created!",ButtonType.OK);
                 a.showAndWait();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR,"Race creation has failed",ButtonType.OK);

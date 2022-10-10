@@ -115,7 +115,7 @@ public class FXML_AddTandaController implements Initializable {
             }
         } else if(MainMenuController.dtTanda.validasi(n.getIDTanda())<=0){
             if(MainMenuController.dtTanda.insert()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION,"New class has been created!",ButtonType.OK);
+                Alert a = new Alert(Alert.AlertType.INFORMATION,"New birthsign has been created!",ButtonType.OK);
                 a.showAndWait();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR,"Birthsign creation has failed",ButtonType.OK);
