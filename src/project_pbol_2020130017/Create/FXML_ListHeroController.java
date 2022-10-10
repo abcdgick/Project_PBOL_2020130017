@@ -93,43 +93,52 @@ public class FXML_ListHeroController implements Initializable {
 
     @FXML
     private void editKlik(ActionEvent event) {
-        HeroModel s = new HeroModel();
-        s=listHero.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_CreateHero.fxml"));
-            Parent root = (Parent)loader.load();
-            FXML_CreateHeroController isidt = (FXML_CreateHeroController)loader.getController();
-            isidt.udahAda(s);
-            Scene scene = new Scene(root);
-            Stage stg = new Stage();
-            stg.initModality(Modality.APPLICATION_MODAL);
-            stg.setResizable(false);
-            stg.setIconified(false);
-            stg.setScene(scene);
-            stg.show();
-            Stage stage = (Stage) btnExitHero.getScene().getWindow();
-            stage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            HeroModel s = new HeroModel();
+            s=listHero.getSelectionModel().getSelectedItem();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_CreateHero.fxml"));
+                Parent root = (Parent)loader.load();
+                FXML_CreateHeroController isidt = (FXML_CreateHeroController)loader.getController();
+                isidt.udahAda(s);
+                Scene scene = new Scene(root);
+                Stage stg = new Stage();
+                stg.initModality(Modality.APPLICATION_MODAL);
+                stg.setResizable(false);
+                stg.setIconified(false);
+                stg.setScene(scene);
+                stg.show();
+                Stage stage = (Stage) btnExitHero.getScene().getWindow();
+                stage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a hero to edit", ButtonType.OK);
+            a.showAndWait();
         }
-        showData();
     }
     
     @FXML
     private void deleteKlik(ActionEvent event) {
-        HeroModel s = new HeroModel();
-        s=listHero.getSelectionModel().getSelectedItem();
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this hero? This action is irrevesable", ButtonType.YES,ButtonType.NO);
-        a.showAndWait();
-        if(a.getResult()==ButtonType.YES){
-            if(dtHero.delete(s.getIDHero())){
-                Alert b = new Alert(Alert.AlertType.INFORMATION, "Hero has been deleted", ButtonType.OK);
-                b.showAndWait();
-            } else {
-                Alert b = new Alert(Alert.AlertType.ERROR, "Hero deletion failed", ButtonType.OK);
-                b.showAndWait();
+        try {
+            HeroModel s=listHero.getSelectionModel().getSelectedItem();
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this hero? This action is irrevesable", ButtonType.YES,ButtonType.NO);
+            a.showAndWait();
+            if(a.getResult()==ButtonType.YES){
+                if(dtHero.delete(s.getIDHero())){
+                    Alert b = new Alert(Alert.AlertType.INFORMATION, "Hero has been deleted", ButtonType.OK);
+                    b.showAndWait();
+                } else {
+                    Alert b = new Alert(Alert.AlertType.ERROR, "Hero deletion failed", ButtonType.OK);
+                    b.showAndWait();
+                }
+                showData();
             }
-            showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a hero to delete", ButtonType.OK);
+            a.showAndWait();
         }
     }
     
@@ -138,7 +147,6 @@ public class FXML_ListHeroController implements Initializable {
         Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Go back to the Main Menu? All unsaved progress will be lost", ButtonType.YES,ButtonType.NO);
         a.showAndWait();
         if(a.getResult()==ButtonType.YES){
-            
             stageMenu.show();
             mediaPlayer.stop();
             

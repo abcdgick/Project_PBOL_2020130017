@@ -84,26 +84,31 @@ public class FXML_ListTandaController implements Initializable {
 
     @FXML
     private void editKlik(ActionEvent event) {
-        TandaModel s = new TandaModel();
-        s=listTanda.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddTanda.fxml"));
-            Parent root = (Parent)loader.load();
-            FXML_AddTandaController isidt = (FXML_AddTandaController)loader.getController();
-            isidt.udahAda(s);
-            Scene scene = new Scene(root);
-            Stage stg = new Stage();
-            stg.initModality(Modality.APPLICATION_MODAL);
-            stg.setResizable(false);
-            stg.setIconified(false);
-            stg.setScene(scene);
-            stg.show();
-            Stage stage = (Stage) btnExit.getScene().getWindow();
-            stage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            TandaModel s = new TandaModel();
+            s=listTanda.getSelectionModel().getSelectedItem();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddTanda.fxml"));
+                Parent root = (Parent)loader.load();
+                FXML_AddTandaController isidt = (FXML_AddTandaController)loader.getController();
+                isidt.udahAda(s);
+                Scene scene = new Scene(root);
+                Stage stg = new Stage();
+                stg.initModality(Modality.APPLICATION_MODAL);
+                stg.setResizable(false);
+                stg.setIconified(false);
+                stg.setScene(scene);
+                stg.show();
+                Stage stage = (Stage) btnExit.getScene().getWindow();
+                stage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a birthsign to edit", ButtonType.OK);
+            a.showAndWait();
+        }
     }
 
     @FXML
@@ -126,18 +131,23 @@ public class FXML_ListTandaController implements Initializable {
 
     @FXML
     private void deleteKlik(ActionEvent event) {
-        TandaModel s = listTanda.getSelectionModel().getSelectedItem();
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this birthsign? This action is irrevesable", ButtonType.YES,ButtonType.NO);
-        a.showAndWait();
-        if(a.getResult()==ButtonType.YES){
-            if(dtTanda.delete(s.getIDTanda())){
-                Alert b = new Alert(Alert.AlertType.INFORMATION, "Birthsign has been deleted", ButtonType.OK);
-                b.showAndWait();
-            } else {
-                Alert b = new Alert(Alert.AlertType.ERROR, "Birthsign deletion failed", ButtonType.OK);
-                b.showAndWait();
+        try {
+            TandaModel s = listTanda.getSelectionModel().getSelectedItem();
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this birthsign? This action is irrevesable", ButtonType.YES,ButtonType.NO);
+            a.showAndWait();
+            if(a.getResult()==ButtonType.YES){
+                if(dtTanda.delete(s.getIDTanda())){
+                    Alert b = new Alert(Alert.AlertType.INFORMATION, "Birthsign has been deleted", ButtonType.OK);
+                    b.showAndWait();
+                } else {
+                    Alert b = new Alert(Alert.AlertType.ERROR, "Birthsign deletion failed", ButtonType.OK);
+                    b.showAndWait();
+                }
+                showData();
             }
-            showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a birthsign to delete", ButtonType.OK);
+            a.showAndWait();
         }
     }
     

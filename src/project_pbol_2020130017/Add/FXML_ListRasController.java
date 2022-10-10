@@ -83,27 +83,34 @@ public class FXML_ListRasController implements Initializable {
 
     @FXML
     private void editKlik(ActionEvent event) {
-        RasModel s = new RasModel();
-        s=listRas.getSelectionModel().getSelectedItem();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddRas.fxml"));
-            Parent root = (Parent)loader.load();
-            FXML_AddRasController isidt = (FXML_AddRasController)loader.getController();
-            isidt.udahAda(s);
-            Scene scene = new Scene(root);
-            Stage stg = new Stage();
-            stg.initModality(Modality.APPLICATION_MODAL);
-            stg.setResizable(false);
-            stg.setIconified(false);
-            stg.setScene(scene);
-            stg.show();
-            Stage stage = (Stage) btnExit.getScene().getWindow();
-            stage.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            RasModel s = new RasModel();
+            s=listRas.getSelectionModel().getSelectedItem();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddRas.fxml"));
+                Parent root = (Parent)loader.load();
+                FXML_AddRasController isidt = (FXML_AddRasController)loader.getController();
+                isidt.udahAda(s);
+                Scene scene = new Scene(root);
+                Stage stg = new Stage();
+                stg.initModality(Modality.APPLICATION_MODAL);
+                stg.setResizable(false);
+                stg.setIconified(false);
+                stg.setScene(scene);
+                stg.show();
+                Stage stage = (Stage) btnExit.getScene().getWindow();
+                stage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a race to edit", ButtonType.OK);
+            a.showAndWait();
         }
-        showData();
     }
+    
+    
 
     @FXML
     private void exitKlik(ActionEvent event) {
@@ -125,20 +132,27 @@ public class FXML_ListRasController implements Initializable {
 
     @FXML
     private void deleteKlik(ActionEvent event) {
-        RasModel s = listRas.getSelectionModel().getSelectedItem();
-        Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this race? This action is irrevesable", ButtonType.YES,ButtonType.NO);
-        a.showAndWait();
-        if(a.getResult()==ButtonType.YES){
-            if(dtRas.delete(s.getIDRas())){
-                Alert b = new Alert(Alert.AlertType.INFORMATION, "Race has been deleted", ButtonType.OK);
-                b.showAndWait();
-            } else {
-                Alert b = new Alert(Alert.AlertType.ERROR, "Race deletion failed", ButtonType.OK);
-                b.showAndWait();
+        try {
+            RasModel s = listRas.getSelectionModel().getSelectedItem();
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this race? This action is irrevesable", ButtonType.YES,ButtonType.NO);
+            a.showAndWait();
+            if(a.getResult()==ButtonType.YES){
+                if(dtRas.delete(s.getIDRas())){
+                    Alert b = new Alert(Alert.AlertType.INFORMATION, "Race has been deleted", ButtonType.OK);
+                    b.showAndWait();
+                } else {
+                    Alert b = new Alert(Alert.AlertType.ERROR, "Race deletion failed", ButtonType.OK);
+                    b.showAndWait();
+                }
+                showData();
             }
-            showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a race to delete", ButtonType.OK);
+            a.showAndWait();
         }
     }
+    
+    
     
     private void showData(){
         ObservableList<RasModel> data = dtRas.Load();

@@ -256,9 +256,12 @@ public class FXML_CreateHeroController implements Initializable {
     private void createHeroKlik(ActionEvent event) {
         String nama = txtNamaHero.getText();
         System.out.print(disHero.getIDKelas());
-        Alert b = new Alert(Alert.AlertType.CONFIRMATION,"Save your hero?", ButtonType.YES,ButtonType.NO);
-        b.showAndWait();
-        if(b.getResult()==ButtonType.YES){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are You Sure?");
+        alert.setHeaderText("The data that you selected will be recorded");
+        alert.setContentText("This action will also close this window");
+        alert.showAndWait();
+        if(alert.getResult()==ButtonType.YES){
             disHero.setNamaHero(nama);
             MainMenuController.dtHero.setHeroModel(disHero);
             System.out.println(disHero.getCreationDate());
@@ -266,6 +269,7 @@ public class FXML_CreateHeroController implements Initializable {
                 if(MainMenuController.dtHero.update()){
                     Alert a = new Alert(Alert.AlertType.INFORMATION, "Hero data has been updated",ButtonType.OK);
                     a.showAndWait();
+                    goBack();
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR, "Hero data can't be updated",ButtonType.OK);
                     a.showAndWait();
@@ -275,6 +279,7 @@ public class FXML_CreateHeroController implements Initializable {
                 if(MainMenuController.dtHero.insert()){
                     Alert a = new Alert(Alert.AlertType.INFORMATION,"Hero created!",ButtonType.OK);
                     a.showAndWait();
+                    goBack();
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR,"Hero creation failed",ButtonType.OK);
                     a.showAndWait();
@@ -293,17 +298,20 @@ public class FXML_CreateHeroController implements Initializable {
         Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Go back to the Main Menu? All unsaved progress will be lost", ButtonType.YES,ButtonType.NO);
         a.showAndWait();
         if(a.getResult()==ButtonType.YES){
-            
-            stageMenu.show();
-            mediaPlayer.stop();
-            
-            music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
-            mediaPlayer = new MediaPlayer(music);
-            mediaPlayer.play();
-            
-            Stage stage = (Stage) btnQuitHero.getScene().getWindow();
-            stage.close();
+            goBack();
         }
+    }
+    
+    private void goBack(){
+        stageMenu.show();
+        mediaPlayer.stop();
+
+        music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
+        mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.play();
+
+        Stage stage = (Stage) btnQuitHero.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -536,6 +544,7 @@ public class FXML_CreateHeroController implements Initializable {
     private void tampilKelas(){
         txtNamaKelas.setText(disHero.getNamaKelas());
         kalkulasi();
+        setSkill();
     }
     
     private void kalkulasi(){
@@ -620,5 +629,10 @@ public class FXML_CreateHeroController implements Initializable {
 
         barLuck.setProgress(disHero.getBaseLuck()/15.0);
         statLuck.setText(String.valueOf(disHero.getBaseLuck()));  
+    }
+    
+    public void setSkill(){
+        if(disHero.getSkill() != null) txtSkill.setText(disHero.getSkill());
+        else txtSkill.setText("NONE");
     }
 }
