@@ -62,6 +62,7 @@ CREATE TABLE `hero` (
 
 LOCK TABLES `hero` WRITE;
 /*!40000 ALTER TABLE `hero` DISABLE KEYS */;
+INSERT INTO `hero` VALUES ('LAARHU01','LA','AR','HU','Contoh1','2022-10-07'),('LOARHU1','LO','SH','EL','Dis Nut','2022-10-08');
 /*!40000 ALTER TABLE `hero` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -133,7 +134,7 @@ CREATE TABLE `ras` (
   `baseDex` tinyint DEFAULT '0',
   `baseCon` tinyint DEFAULT '0',
   `baseInt` tinyint DEFAULT '0',
-  `baesWis` tinyint DEFAULT '0',
+  `baseWis` tinyint DEFAULT '0',
   `baseLuck` tinyint DEFAULT '0',
   PRIMARY KEY (`IDRas`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -194,4 +195,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-10-03 15:23:58
+-- Dump completed on 2022-10-13  9:22:49
