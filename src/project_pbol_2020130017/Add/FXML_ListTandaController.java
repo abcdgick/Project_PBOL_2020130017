@@ -27,6 +27,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import project_pbol_2020130017.DB.TandaModel;
 import static project_pbol_2020130017.Main.stageMenu;
+import static project_pbol_2020130017.Main.volume;
 import static project_pbol_2020130017.Menu.MainMenuController.dtTanda;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 import static project_pbol_2020130017.Menu.MainMenuController.music;
@@ -130,6 +131,7 @@ public class FXML_ListTandaController implements Initializable {
             
             music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
             mediaPlayer = new MediaPlayer(music);
+            mediaPlayer.setVolume(volume);
             mediaPlayer.play();
             
             Stage stage = (Stage) btnExit.getScene().getWindow();
@@ -220,6 +222,7 @@ public class FXML_ListTandaController implements Initializable {
     private void playAudio(){
         music = new Media(getClass().getResource("Add.mp4").toExternalForm()); 
         mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(volume);
         mediaPlayer.play();
     }
 }

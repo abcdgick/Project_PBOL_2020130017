@@ -25,10 +25,10 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import project_pbol_2020130017.DB.RasModel;
+import project_pbol_2020130017.DB.AgamaModel;
 import static project_pbol_2020130017.Main.stageMenu;
 import static project_pbol_2020130017.Main.volume;
-import static project_pbol_2020130017.Menu.MainMenuController.dtRas;
+import static project_pbol_2020130017.Menu.MainMenuController.dtAgama;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 import static project_pbol_2020130017.Menu.MainMenuController.music;
 
@@ -37,7 +37,7 @@ import static project_pbol_2020130017.Menu.MainMenuController.music;
  *
  * @author acer
  */
-public class FXML_ListRasController implements Initializable {
+public class FXML_ListAgamaController implements Initializable {
 
     @FXML
     private AnchorPane addPane;
@@ -48,7 +48,7 @@ public class FXML_ListRasController implements Initializable {
     @FXML
     private Button btnExit;
     @FXML
-    private TableView<RasModel> listRas;
+    private TableView<AgamaModel> listAgama;
     @FXML
     private Button btnDelete;
 
@@ -57,16 +57,16 @@ public class FXML_ListRasController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       showData();
-       playAudio();
+        playAudio();
+        showData();
     }    
 
     @FXML
     private void newKlik(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddRas.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddAgama.fxml"));
             Parent root = (Parent)loader.load();
-            FXML_AddRasController isidt = (FXML_AddRasController)loader.getController();
+            FXML_AddAgamaController isidt = (FXML_AddAgamaController)loader.getController();
             Scene scene = new Scene(root);
             Stage stg = new Stage();
             
@@ -89,12 +89,11 @@ public class FXML_ListRasController implements Initializable {
     @FXML
     private void editKlik(ActionEvent event) {
         try {
-            RasModel s = new RasModel();
-            s=listRas.getSelectionModel().getSelectedItem();
+            AgamaModel s =listAgama.getSelectionModel().getSelectedItem();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddRas.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_AddAgama.fxml"));
                 Parent root = (Parent)loader.load();
-                FXML_AddRasController isidt = (FXML_AddRasController)loader.getController();
+                FXML_AddAgamaController isidt = (FXML_AddAgamaController)loader.getController();
                 isidt.udahAda(s);
                 Scene scene = new Scene(root);
                 Stage stg = new Stage();
@@ -112,14 +111,12 @@ public class FXML_ListRasController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            showData();
+        showData();
         } catch (Exception e) {
-            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a race to edit", ButtonType.OK);
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a religion to edit", ButtonType.OK);
             a.showAndWait();
         }
     }
-    
-    
 
     @FXML
     private void exitKlik(ActionEvent event) {
@@ -143,67 +140,80 @@ public class FXML_ListRasController implements Initializable {
     @FXML
     private void deleteKlik(ActionEvent event) {
         try {
-            RasModel s = listRas.getSelectionModel().getSelectedItem();
-            Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this race? This action is irrevesable", ButtonType.YES,ButtonType.NO);
+            AgamaModel s = listAgama.getSelectionModel().getSelectedItem();
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Delete this religion? This action is irrevesable", ButtonType.YES,ButtonType.NO);
             a.showAndWait();
             if(a.getResult()==ButtonType.YES){
-                if(dtRas.delete(s.getIDRas())){
-                    Alert b = new Alert(Alert.AlertType.INFORMATION, "Race has been deleted", ButtonType.OK);
+                if(dtAgama.delete(s.getIDAgama())){
+                    Alert b = new Alert(Alert.AlertType.INFORMATION, "Religion has been deleted", ButtonType.OK);
                     b.showAndWait();
                 } else {
-                    Alert b = new Alert(Alert.AlertType.ERROR, "Race deletion failed", ButtonType.OK);
+                    Alert b = new Alert(Alert.AlertType.ERROR, "Religion deletion failed", ButtonType.OK);
                     b.showAndWait();
                 }
                 showData();
             }
         } catch (Exception e) {
-            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a race to delete", ButtonType.OK);
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a religion to delete", ButtonType.OK);
             a.showAndWait();
         }
     }
     
-    
-    
     private void showData(){
-        ObservableList<RasModel> data = dtRas.Load();
+        ObservableList<AgamaModel> data = dtAgama.Load();
         if(data!=null){
-            listRas.getColumns().clear();
-            listRas.getItems().clear();
+            listAgama.getColumns().clear();
+            listAgama.getItems().clear();
             System.out.println("Jalan");
-            TableColumn col = new TableColumn("Race ID");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, String>("IDRas"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Race Name");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, String>("namaRas"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Strength");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseStr"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Agility");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseAgi"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Dexterity");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseDex"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Constitution");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseCon"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Intelligence");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseInt"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Wisdom");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseWis"));
-            listRas.getColumns().addAll(col);
-            col = new TableColumn("Base Luck");
-            col.setCellValueFactory(new PropertyValueFactory<RasModel, Integer>("baseLuck"));
-            listRas.getColumns().addAll(col);
+            TableColumn col = new TableColumn("Religion ID");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, String>("IDAgama"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Religion Name");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, String>("namaAgama"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Religion Detail");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, String>("detilAgama"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("HP Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffHP"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("MP Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffMP"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Physical Attack Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffPAtk"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Physical Defence Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffPDef"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Magical Attack Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffMAtk"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Magical Defence Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffMDef"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Attack Speed Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffAtkS"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Stamina Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffSta"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Stamina Regen Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffStaR"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("MP Regen Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffMPR"));
+            listAgama.getColumns().addAll(col);
+            col = new TableColumn("Critical Chance Buff");
+            col.setCellValueFactory(new PropertyValueFactory<AgamaModel, Integer>("buffCrit"));
+            listAgama.getColumns().addAll(col);
             
-            listRas.setItems(data);
+            listAgama.setItems(data);
 
         } else {
-            Alert a = new Alert(Alert.AlertType.ERROR, "There's No Race Yet", ButtonType.OK);
+            Alert a = new Alert(Alert.AlertType.ERROR, "There's No Religion Yet", ButtonType.OK);
             a.showAndWait();
-            //listRas.getScene().getWindow().hide();
+            //listAgama.getScene().getWindow().hide();
         }
     }
     

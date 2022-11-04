@@ -29,6 +29,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import project_pbol_2020130017.DB.KelasModel;
 import static project_pbol_2020130017.Main.stageMenu;
+import static project_pbol_2020130017.Main.volume;
 import project_pbol_2020130017.Menu.MainMenuController;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 import static project_pbol_2020130017.Menu.MainMenuController.music;
@@ -190,7 +191,9 @@ public class FXML_AddKelasController implements Initializable {
             mediaPlayer.stop();
             
             music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
+            mediaPlayer.setVolume(volume);
             mediaPlayer = new MediaPlayer(music);
+            mediaPlayer.setVolume(volume);
             mediaPlayer.play();
             
             Stage stage = (Stage) btnExit.getScene().getWindow();

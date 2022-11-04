@@ -46,6 +46,8 @@ public class FXML_ChoiceAddController implements Initializable {
     private Button btnTanda;
     @FXML
     private Button btnBack;
+    @FXML
+    private Button btnAgama;
 
     /**
      * Initializes the controller class.
@@ -112,6 +114,25 @@ public class FXML_ChoiceAddController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    
+    @FXML
+    private void agamaKlik(ActionEvent event) throws IOException {
+        System.out.println("Add Tanda");
+        
+        stopMenu();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListAgama.fxml"));
+        Parent root = loader.load();
+        
+        Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        
+        String css = this.getClass().getResource("/project_pbol_2020130017/Add/Style3.css").toExternalForm();
+        scene.getStylesheets().add(css);
+        
+        stage.setScene(scene);
+        stage.show();
+    }
 
     @FXML
     private void backKlik(ActionEvent event) throws IOException {
@@ -134,5 +155,5 @@ public class FXML_ChoiceAddController implements Initializable {
         stageMenu.close();
         mediaPlayer.stop();
     }
-    
+
 }

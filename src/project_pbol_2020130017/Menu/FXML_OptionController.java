@@ -56,17 +56,17 @@ public class FXML_OptionController implements Initializable {
     
     private void volume(){
         //Main.volume = sliderVolume.getValue()/100.0;
-        labelVolume.setText(Integer.toString((int) (Main.volume * 100.0)));
-        sliderVolume.setValue(Main.volume * 100.0);
-        System.out.println(Main.volume);
-        System.out.println(labelVolume.getText());
+        labelVolume.setText(Integer.toString((int) (Main.volume * 4 * 100.0)));
+        sliderVolume.setValue(Main.volume * 4 * 100.0);
+        //System.out.println(Main.volume);
+        //System.out.println(labelVolume.getText());
         
         sliderVolume.valueProperty().addListener(new ChangeListener<Number>(){
             @Override
             public void changed(ObservableValue<?extends Number>
                 observable, Number oldValue, Number newValue){
-                Main.volume = sliderVolume.getValue()/100;
-                labelVolume.setText(Integer.toString((int)(Main.volume * 100.0)));
+                Main.volume = sliderVolume.getValue()/400;
+                labelVolume.setText(Integer.toString((int)(Main.volume * 4 * 100.0)));
                 mediaPlayer.setVolume(Main.volume);
             }
         });

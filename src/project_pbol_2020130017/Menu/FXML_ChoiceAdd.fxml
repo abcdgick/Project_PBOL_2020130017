@@ -10,19 +10,24 @@
 
 <AnchorPane id="choicePane" fx:id="choicePane" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project_pbol_2020130017.Menu.FXML_ChoiceAddController">
    <children>
-      <ImageView fx:id="imageRace" fitHeight="85.0" fitWidth="255.0" layoutX="38.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageRace" fitHeight="85.0" fitWidth="255.0" layoutX="38.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Add%20Race.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageClass" fitHeight="69.0" fitWidth="267.0" layoutX="32.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageClass" fitHeight="69.0" fitWidth="267.0" layoutX="32.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Add%20Class.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imageTanda" fitHeight="106.0" fitWidth="378.0" layoutX="32.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imageTanda" fitHeight="106.0" fitWidth="378.0" layoutX="32.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Add%20Birthsign.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="57.0" fitWidth="324.0" layoutX="32.0" layoutY="361.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Add%20Religion.png" />
          </image>
       </ImageView>
       <ImageView fx:id="imageBack" fitHeight="49.0" fitWidth="166.0" layoutX="38.0" layoutY="507.0" pickOnBounds="true" preserveRatio="true">
@@ -30,9 +35,10 @@
             <Image url="@Back.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnRace" layoutX="38.0" layoutY="50.0" mnemonicParsing="false" onAction="#raceKlik" opacity="0.0" prefHeight="55.0" prefWidth="255.0" text="Button" />
-      <Button fx:id="btnClass" layoutX="38.0" layoutY="170.0" mnemonicParsing="false" onAction="#classKlik" opacity="0.0" prefHeight="55.0" prefWidth="255.0" text="Button" />
-      <Button fx:id="btnTanda" layoutX="32.0" layoutY="301.0" mnemonicParsing="false" onAction="#tandaKlik" opacity="0.0" prefHeight="55.0" prefWidth="378.0" text="Button" />
+      <Button fx:id="btnRace" layoutX="38.0" layoutY="39.0" mnemonicParsing="false" onAction="#raceKlik" opacity="0.0" prefHeight="55.0" prefWidth="255.0" text="Button" />
+      <Button fx:id="btnClass" layoutX="38.0" layoutY="143.0" mnemonicParsing="false" onAction="#classKlik" opacity="0.0" prefHeight="55.0" prefWidth="255.0" text="Button" />
+      <Button fx:id="btnTanda" layoutX="38.0" layoutY="251.0" mnemonicParsing="false" onAction="#tandaKlik" opacity="0.0" prefHeight="55.0" prefWidth="378.0" text="Button" />
+      <Button fx:id="btnAgama" layoutX="38.0" layoutY="359.0" mnemonicParsing="false" onAction="#agamaKlik" opacity="0.0" prefHeight="55.0" prefWidth="316.0" text="Button" />
       <Button fx:id="btnBack" layoutX="38.0" layoutY="507.0" mnemonicParsing="false" onAction="#backKlik" opacity="0.0" prefHeight="49.0" prefWidth="127.0" text="Button" />
    </children>
 </AnchorPane>

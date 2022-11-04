@@ -4,30 +4,21 @@
  */
 package project_pbol_2020130017.Add;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import project_pbol_2020130017.DB.TandaModel;
+import project_pbol_2020130017.DB.AgamaModel;
 import static project_pbol_2020130017.Main.stageMenu;
 import static project_pbol_2020130017.Main.volume;
 import project_pbol_2020130017.Menu.MainMenuController;
@@ -39,7 +30,7 @@ import static project_pbol_2020130017.Menu.MainMenuController.music;
  *
  * @author acer
  */
-public class FXML_AddTandaController implements Initializable {
+public class FXML_AddAgamaController implements Initializable {
 
     @FXML
     private AnchorPane addPane;
@@ -64,17 +55,17 @@ public class FXML_AddTandaController implements Initializable {
     @FXML
     private TextField txtBuffMP;
     @FXML
-    private Button btnBuffBirthsign;
+    private Button btnAddReligion;
     @FXML
     private Button btnExit;
     @FXML
-    private TextField txtBirthsignID;
+    private TextField txtReligionID;
     @FXML
-    private TextField txtBirthsignName;
+    private TextField txtReligionName;
     @FXML
     private TextField txtBuffMDef;
     @FXML
-    private TextArea txtBirthsignDetail;
+    private TextArea txtReligionDetail;
 
     private boolean editData = false;
     /**
@@ -86,12 +77,12 @@ public class FXML_AddTandaController implements Initializable {
     }    
 
     @FXML
-    private void addBirthsignKlik(ActionEvent event) {
-        TandaModel n = new TandaModel();
+    private void addReligionKlik(ActionEvent event) {
+        AgamaModel n = new AgamaModel();
         
-        n.setIDTanda(txtBirthsignID.getText());
-        n.setNamaTanda(txtBirthsignName.getText());
-        n.setDetilTanda(txtBirthsignDetail.getText());
+        n.setIDAgama(txtReligionID.getText());
+        n.setNamaAgama(txtReligionName.getText());
+        n.setDetilAgama(txtReligionDetail.getText());
         
         n.setBuffHP(Integer.parseInt(txtBuffHP.getText()));
         n.setBuffMP(Integer.parseInt(txtBuffMP.getText()));
@@ -105,27 +96,27 @@ public class FXML_AddTandaController implements Initializable {
         n.setBuffMPR(Integer.parseInt(txtBuffMPR.getText()));
         n.setBuffCrit(Integer.parseInt(txtBuffCrit.getText()));
         
-        MainMenuController.dtTanda.setTandaModel(n);
+        MainMenuController.dtAgama.setAgamaModel(n);
         if(editData){
-            if(MainMenuController.dtTanda.update()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION, "Birthsign data has been updated",ButtonType.OK);
+            if(MainMenuController.dtAgama.update()){
+                Alert a = new Alert(Alert.AlertType.INFORMATION, "Religion data has been updated",ButtonType.OK);
                 a.showAndWait();
-                txtBirthsignID.setEditable(true);
+                txtReligionID.setEditable(true);
             } else {
-                Alert a = new Alert(Alert.AlertType.ERROR, "Birthsign hasn't been updated",ButtonType.OK);
+                Alert a = new Alert(Alert.AlertType.ERROR, "Religion hasn't been updated",ButtonType.OK);
             }
-        } else if(MainMenuController.dtTanda.validasi(n.getIDTanda())<=0){
-            if(MainMenuController.dtTanda.insert()){
+        } else if(MainMenuController.dtAgama.validasi(n.getIDAgama())<=0){
+            if(MainMenuController.dtAgama.insert()){
                 Alert a = new Alert(Alert.AlertType.INFORMATION,"New birthsign has been created!",ButtonType.OK);
                 a.showAndWait();
             } else {
-                Alert a = new Alert(Alert.AlertType.ERROR,"Birthsign creation has failed",ButtonType.OK);
+                Alert a = new Alert(Alert.AlertType.ERROR,"Religion creation has failed",ButtonType.OK);
                 a.showAndWait();
             }
         } else {
-            Alert a = new Alert(Alert.AlertType.ERROR,"Birthsign already exists",ButtonType.OK);
+            Alert a = new Alert(Alert.AlertType.ERROR,"Religion already exists",ButtonType.OK);
             a.showAndWait();
-            txtBirthsignID.requestFocus();
+            txtReligionID.requestFocus();
         }
     }
 
@@ -148,13 +139,13 @@ public class FXML_AddTandaController implements Initializable {
         }
     }
     
-    public void udahAda(TandaModel d){
-        if(!d.getIDTanda().isEmpty()){
+    public void udahAda(AgamaModel d){
+        if(!d.getIDAgama().isEmpty()){
             editData=true;
             
-            txtBirthsignID.setText(d.getIDTanda());
-            txtBirthsignName.setText(d.getNamaTanda()); 
-            txtBirthsignDetail.setText(d.getDetilTanda());
+            txtReligionID.setText(d.getIDAgama());
+            txtReligionName.setText(d.getNamaAgama()); 
+            txtReligionDetail.setText(d.getDetilAgama());
             txtBuffHP.setText(String.valueOf(d.getBuffHP()));
             txtBuffMP.setText(String.valueOf(d.getBuffMP()));
             txtBuffPAtk.setText(String.valueOf(d.getBuffPAtk()));
@@ -167,7 +158,8 @@ public class FXML_AddTandaController implements Initializable {
             txtBuffMPR.setText(String.valueOf(d.getBuffMPR()));
             txtBuffCrit.setText(String.valueOf(d.getBuffCrit()));
             
-            txtBirthsignID.setEditable(false);
+            txtReligionID.setEditable(false);
         }
     }
+    
 }

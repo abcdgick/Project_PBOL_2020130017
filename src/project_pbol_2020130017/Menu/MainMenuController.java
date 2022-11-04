@@ -23,10 +23,12 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import project_pbol_2020130017.DB.DBAgama;
 import project_pbol_2020130017.DB.DBHero;
 import project_pbol_2020130017.DB.DBKelas;
 import project_pbol_2020130017.DB.DBRas;
 import project_pbol_2020130017.DB.DBTanda;
+import static project_pbol_2020130017.Main.volume;
 
 /**
  * FXML Controller class
@@ -55,6 +57,7 @@ public class MainMenuController implements Initializable {
     @FXML
     private Button btnExit;
     
+    public static DBAgama dtAgama = new DBAgama();
     public static DBKelas dtKelas = new DBKelas();
     public static DBRas dtRas = new DBRas();
     public static DBTanda dtTanda = new DBTanda();
@@ -130,7 +133,7 @@ public class MainMenuController implements Initializable {
         music = new Media(getClass().getResource("Menu.mp4").toExternalForm()); 
         
         mediaPlayer = new MediaPlayer(music);
-        
+        mediaPlayer.setVolume(volume);
         mediaPlayer.setAutoPlay(true);
         mediaView.setMediaPlayer(mediaPlayer);
     }

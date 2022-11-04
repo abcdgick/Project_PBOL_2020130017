@@ -18,12 +18,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     
-    public static double volume;
+    public static double volume = 0.3;
     public static Stage stageMenu;
     
     @Override
     public void start(Stage stage) throws Exception {
-        volume = 1;
         Parent root = FXMLLoader.load(getClass().getResource("Menu/MainMenu.fxml"));
         
         Scene scene = new Scene(root);
