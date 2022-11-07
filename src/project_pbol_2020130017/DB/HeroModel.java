@@ -11,21 +11,23 @@ import java.sql.Date;
  * @author acer
  */
 public class HeroModel {
-    private String IDHero, IDTanda, IDKelas, IDRas, namaHero, namaTanda, namaKelas, namaRas;
-    private String basedOf,ketKelas, skill, ketSkill, detilTanda;
+    private String IDHero, IDTanda, IDKelas, IDRas, IDAgama, namaHero, namaTanda, namaKelas, namaRas, namaAgama;
+    private String basedOf,ketKelas, skill, ketSkill, detilTanda, detilAgama;
     private Date creationDate;
     private int baseStr, baseAgi, baseDex, baseCon, baseInt, baseWis, baseLuck;
     private int addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit;
     private int buffHP, buffMP, buffPAtk, buffPDef, buffMAtk, buffMDef, buffAtkS, buffSta, buffStaR, buffMPR, buffCrit;
+    private int buffHP2, buffMP2, buffPAtk2, buffPDef2, buffMAtk2, buffMDef2, buffAtkS2, buffSta2, buffStaR2, buffMPR2, buffCrit2;
 
     public HeroModel(){
     }
     
-    public HeroModel(String IDHero, String IDTanda, String IDKelas, String IDRas, String namaHero, Date creationDate) {
+    public HeroModel(String IDHero, String IDTanda, String IDKelas, String IDRas, String namaHero, Date creationDate, String IDAgama) {
         this.IDHero = IDHero;
         this.IDTanda = IDTanda;
         this.IDKelas = IDKelas;
         this.IDRas = IDRas;
+        this.IDAgama = IDAgama;
         this.namaHero = namaHero;
         this.creationDate = creationDate;
     }
@@ -374,4 +376,117 @@ public class HeroModel {
         this.buffCrit = buffCrit;
     }
 
+    public String getIDAgama() {
+        return IDAgama;
+    }
+
+    public void setIDAgama(String IDAgama) {
+        this.IDAgama = IDAgama;
+    }
+
+    public String getNamaAgama() {
+        return namaAgama;
+    }
+
+    public void setNamaAgama(String namaAgama) {
+        this.namaAgama = namaAgama;
+    }
+
+    public String getDetilAgama() {
+        return detilAgama;
+    }
+
+    public void setDetilAgama(String detilAgama) {
+        this.detilAgama = detilAgama;
+    }
+    
+    public int getBuffHP2() {
+        return buffHP2;
+    }
+
+    public void setBuffHP2(int buffHP2) {
+        this.buffHP2 = buffHP2;
+    }
+
+    public int getBuffMP2() {
+        return buffMP2;
+    }
+
+    public void setBuffMP2(int buffMP2) {
+        this.buffMP2 = buffMP2;
+    }
+
+    public int getBuffPAtk2() {
+        return buffPAtk2;
+    }
+
+    public void setBuffPAtk2(int buffPAtk2) {
+        this.buffPAtk2 = buffPAtk2;
+    }
+
+    public int getBuffPDef2() {
+        return buffPDef2;
+    }
+
+    public void setBuffPDef2(int buffPDef2) {
+        this.buffPDef2 = buffPDef2;
+    }
+
+    public int getBuffMAtk2() {
+        return buffMAtk2;
+    }
+
+    public void setBuffMAtk2(int buffMAtk2) {
+        this.buffMAtk2 = buffMAtk2;
+    }
+
+    public int getBuffMDef2() {
+        return buffMDef2;
+    }
+
+    public void setBuffMDef2(int buffMDef2) {
+        this.buffMDef2 = buffMDef2;
+    }
+
+    public int getBuffAtkS2() {
+        return buffAtkS2;
+    }
+
+    public void setBuffAtkS2(int buffAtkS2) {
+        this.buffAtkS2 = buffAtkS2;
+    }
+
+    public int getBuffSta2() {
+        return buffSta2;
+    }
+
+    public void setBuffSta2(int buffSta2) {
+        this.buffSta2 = buffSta2;
+    }
+
+    public int getBuffStaR2() {
+        return buffStaR2;
+    }
+
+    public void setBuffStaR2(int buffStaR2) {
+        this.buffStaR2 = buffStaR2;
+    }
+
+    public int getBuffMPR2() {
+        return buffMPR2;
+    }
+
+    public void setBuffMPR2(int buffMPR2) {
+        this.buffMPR2 = buffMPR2;
+    }
+
+    public int getBuffCrit2() {
+        return buffCrit2;
+    }
+
+    public void setBuffCrit2(int buffCrit2) {
+        this.buffCrit2 = buffCrit2;
+    }
+
+    
 }

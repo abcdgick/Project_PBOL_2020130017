@@ -21,15 +21,18 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import project_pbol_2020130017.DB.AgamaModel;
 import project_pbol_2020130017.DB.HeroModel;
 import project_pbol_2020130017.DB.KelasModel;
 import project_pbol_2020130017.DB.RasModel;
 import project_pbol_2020130017.DB.TandaModel;
 import static project_pbol_2020130017.Main.stageMenu;
+import static project_pbol_2020130017.Main.volume;
 import project_pbol_2020130017.Menu.MainMenuController;
 import static project_pbol_2020130017.Menu.MainMenuController.dtHero;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
@@ -148,6 +151,18 @@ public class FXML_CreateHeroController implements Initializable {
     private Button btnNextTanda;
     @FXML
     private Label txtSkill;
+    @FXML
+    private Button btnNextAgama;
+    @FXML
+    private Button btnPrevAgama;
+    @FXML
+    private Label txtAgama;
+    @FXML
+    private Label txtWhatSkill;
+    @FXML
+    private Label txtWhatTanda;
+    @FXML
+    private Label txtWhat;
 
     private boolean editData = false;
     
@@ -156,12 +171,15 @@ public class FXML_CreateHeroController implements Initializable {
     ObservableList<KelasModel> listKelasDasar, listKelasAdv;
     ObservableList<RasModel> listRas;
     ObservableList<TandaModel> listTanda;
+    ObservableList<AgamaModel> listAgama;
     
-    private int pilKelasDasar, pilRas, pilTanda, pilKelasAdv, kirikanan =0;
+    private int pilKelasDasar, pilRas, pilTanda, pilAgama, pilKelasAdv, kirikanan =0;
     
     private double HP, MP, PAtk, PDef, MAtk, MDef, AtkS, Sta, StaR, MPR, Crit;
     
     final String pPath = "src/project_pbol_2020130017/Assets/";
+    @FXML
+    private Label txtWhatKelas;
     /**
      * Initializes the controller class.
      */
@@ -289,8 +307,6 @@ public class FXML_CreateHeroController implements Initializable {
                 a.showAndWait();
             }
         }
-        
-        
     }
 
     @FXML
@@ -308,6 +324,7 @@ public class FXML_CreateHeroController implements Initializable {
 
         music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
         mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(volume);
         mediaPlayer.play();
 
         Stage stage = (Stage) btnQuitHero.getScene().getWindow();
@@ -350,6 +367,22 @@ public class FXML_CreateHeroController implements Initializable {
         tampilTanda();
     }
 
+    @FXML
+    private void nextAgamaKlik(ActionEvent event) {
+        pilAgama++;
+        if(pilAgama > listAgama.size() - 1) pilAgama = 0;
+        System.out.println(pilAgama);
+        ambilAgama();
+        tampilAgama();
+    }
+
+    @FXML
+    private void prevAgamaKlik(ActionEvent event) {
+        pilAgama--;
+        if(pilAgama < 0) pilAgama = listAgama.size() - 1;
+        ambilAgama();
+        tampilAgama();
+    }
     
     public void gantiImage(){
         File file = new File(pPath+"/"+disHero.getNamaKelas()+"/"+disHero.getNamaKelas()+" "+disHero.getNamaRas()+".png");
@@ -365,11 +398,12 @@ public class FXML_CreateHeroController implements Initializable {
         imageView.setImage(image);
     }
     
-    public void buatBaru(String IDHero, String IDTanda, String IDKelas, String IDRas, String namaHero, Date creationDate){
-        disHero = new HeroModel(IDHero, IDTanda, IDKelas, IDRas, namaHero, creationDate);
+    public void buatBaru(String IDHero, String IDTanda, String IDKelas, String IDRas, String namaHero, Date creationDate, String IDAgama){
+        disHero = new HeroModel(IDHero, IDTanda, IDKelas, IDRas, namaHero, creationDate, IDAgama);
         pilRas = 0;
         pilKelasDasar = 0;
         pilTanda = 0;
+        pilAgama = 0;
         pilKelasAdv = -1;
         editData = false;
         txtNamaHero.setText(namaHero);
@@ -390,11 +424,15 @@ public class FXML_CreateHeroController implements Initializable {
         ObservableList<String> listIDTanda = MainMenuController.dtTanda.getIDTanda();
         ObservableList<String> listIDKelas = MainMenuController.dtKelas.getIDKelas();
         ObservableList<String> listIDRas = MainMenuController.dtRas.getIDRas();
+        ObservableList<String> listIDAgama = MainMenuController.dtAgama.getIDAgama();
         
         String dasar = MainMenuController.dtKelas.isKelasDasar(disHero.getIDKelas());
         pilTanda = (byte) listIDTanda.indexOf(disHero.getIDTanda());
+        pilAgama = (byte) listIDAgama.indexOf(disHero.getIDAgama());
+        pilRas = (byte) listIDRas.indexOf(disHero.getIDRas());
         //pilKelasDasar = (byte) listIDKelas.indexOf(disHero.getIDKelas());
-        if("".equals(dasar)) {
+        System.out.println(dasar);
+        if(dasar == null) {
             pilKelasDasar = (byte) listIDKelas.indexOf(disHero.getIDKelas());
             pilKelasAdv = -1;
             gantiImage();
@@ -422,10 +460,14 @@ public class FXML_CreateHeroController implements Initializable {
         listTanda = MainMenuController.dtTanda.Load();
         ambilTanda();
         
+        listAgama = MainMenuController.dtAgama.Load();
+        ambilAgama();
+        
         //gantiImage();
         tampilTanda();
         tampilRas();
         tampilKelas();
+        tampilAgama();
     }
     
     public void ambilRas(){
@@ -531,6 +573,35 @@ public class FXML_CreateHeroController implements Initializable {
         }
     }
     
+    public void ambilAgama(){
+        if(listAgama != null){
+            disHero.setIDAgama(listAgama.get(pilAgama).getIDAgama());
+            disHero.setNamaAgama(listAgama.get(pilAgama).getNamaAgama());
+            disHero.setDetilAgama(listAgama.get(pilAgama).getDetilAgama());
+
+            disHero.setBuffHP2(listAgama.get(pilAgama).getBuffHP());
+            disHero.setBuffMP2(listAgama.get(pilAgama).getBuffMP());
+            disHero.setBuffPAtk2(listAgama.get(pilAgama).getBuffPAtk());
+            disHero.setBuffPDef2(listAgama.get(pilAgama).getBuffPDef());
+            disHero.setBuffMAtk2(listAgama.get(pilAgama).getBuffMAtk());
+            disHero.setBuffMDef2(listAgama.get(pilAgama).getBuffMDef());
+            disHero.setBuffAtkS2(listAgama.get(pilAgama).getBuffAtkS());
+            disHero.setBuffSta2(listAgama.get(pilAgama).getBuffSta());
+            disHero.setBuffStaR2(listAgama.get(pilAgama).getBuffStaR());
+            disHero.setBuffMPR2(listAgama.get(pilAgama).getBuffMPR());
+            disHero.setBuffCrit2(listAgama.get(pilAgama).getBuffCrit());
+        } else {
+            Alert a = new Alert(Alert.AlertType.ERROR, "Data Agama Kosong", ButtonType.OK);
+            a.showAndWait();
+            txtNamaHero.getScene().getWindow().hide();
+        }
+    }
+    
+    private void tampilAgama(){
+        txtAgama.setText(disHero.getNamaAgama());
+        kalkulasi();
+    }
+    
     private void tampilTanda(){
         txtTanda.setText(disHero.getNamaTanda());
         kalkulasi();
@@ -558,81 +629,113 @@ public class FXML_CreateHeroController implements Initializable {
         Sta = 0.6 * ((4 * disHero.getBaseAgi() + 4 * disHero.getBaseDex() + 2 * disHero.getBaseStr())/0.15);
         StaR = 0.6 * ((6 * disHero.getBaseAgi() + 4 * disHero.getBaseDex())/1.5);
         MPR =  0.6 * ((7 *disHero.getBaseInt() + 3 * disHero.getBaseWis())/1.5);
-        Crit =  0.3 * ((6 *disHero.getBaseDex() + 4 * disHero.getBaseLuck())/1.5);
+        Crit =  0.4 * ((6 *disHero.getBaseDex() + 4 * disHero.getBaseLuck())/1.5);
         
-        HP = Math.round(HP + HP * (disHero.getAddHP()/100.0) + HP * (disHero.getBuffHP()/100.0));
-        MP = Math.round(MP + MP * (disHero.getAddMP()/100.0) + MP * (disHero.getBuffMP()/100.0));
-        PAtk = Math.round((PAtk + PAtk * (disHero.getAddPAtk()/100.0) + PAtk * (disHero.getBuffPAtk()/100.0))* 10)/10;
-        PDef = Math.round((PDef + PDef * (disHero.getAddPDef()/100.0) + PDef * (disHero.getBuffPDef()/100.0))* 10)/10;
-        MAtk = Math.round((MAtk + MAtk * (disHero.getAddMAtk()/100.0) + MAtk * (disHero.getBuffMAtk()/100.0))* 10)/10;
-        MDef = Math.round((MDef + MDef * (disHero.getAddMDef()/100.0) + MDef * (disHero.getBuffMDef()/100.0))* 10)/10;
-        AtkS = Math.round((AtkS + AtkS * (disHero.getAddAtkS()/100.0) + AtkS * (disHero.getBuffAtkS()/100.0))* 10)/10;
-        Sta = Math.round((Sta + Sta * (disHero.getAddSta()/100.0) + Sta * (disHero.getBuffSta()/100.0))* 10)/10;
-        StaR = Math.round((StaR + StaR * (disHero.getAddStaR()/100.0) + StaR * (disHero.getBuffStaR()/100.0))* 10)/10;
-        MPR = Math.round((MPR + MPR * (disHero.getAddMPR()/100.0) + MPR * (disHero.getBuffMPR()/100.0))* 10)/10;
-        Crit = Math.round((Crit + Crit * (disHero.getAddCrit()/100.0) + Crit * (disHero.getBuffCrit()/100.0))* 10)/10;
+        HP = HP + HP * (disHero.getAddHP()/100.0) + HP * (disHero.getBuffHP()/100.0) + HP * (disHero.getBuffHP2()/100.0);
+        MP = MP + MP * (disHero.getAddMP()/100.0) + MP * (disHero.getBuffMP()/100.0) + MP * (disHero.getBuffMP2()/100.0);
+        PAtk = PAtk + PAtk * (disHero.getAddPAtk()/100.0) + PAtk * (disHero.getBuffPAtk()/100.0) + PAtk * (disHero.getBuffPAtk2()/100.0);
+        PDef = PDef + PDef * (disHero.getAddPDef()/100.0) + PDef * (disHero.getBuffPDef()/100.0) + PDef * (disHero.getBuffPDef2()/100.0);
+        MAtk = MAtk + MAtk * (disHero.getAddMAtk()/100.0) + MAtk * (disHero.getBuffMAtk()/100.0) + MAtk * (disHero.getBuffMAtk2()/100.0);
+        MDef = MDef + MDef * (disHero.getAddMDef()/100.0) + MDef * (disHero.getBuffMDef()/100.0) + MDef * (disHero.getBuffMDef2()/100.0);
+        AtkS = AtkS + AtkS * (disHero.getAddAtkS()/100.0) + AtkS * (disHero.getBuffAtkS()/100.0) + AtkS * (disHero.getBuffAtkS2()/100.0);
+        Sta = Sta + Sta * (disHero.getAddSta()/100.0) + Sta * (disHero.getBuffSta()/100.0) + Sta * (disHero.getBuffSta2()/100.0);
+        StaR = StaR + StaR * (disHero.getAddStaR()/100.0) + StaR * (disHero.getBuffStaR()/100.0) + StaR * (disHero.getBuffStaR2()/100.0);
+        MPR = MPR + MPR * (disHero.getAddMPR()/100.0) + MPR * (disHero.getBuffMPR()/100.0) + MPR * (disHero.getBuffMPR2()/100.0);
+        Crit = Crit + Crit * (disHero.getAddCrit()/100.0) + Crit * (disHero.getBuffCrit()/100.0) + Crit * (disHero.getBuffCrit2()/100.0);
         
         tampilStat();
     }
     
     private void tampilStat(){
-        barHP.setProgress(HP/700);
-        statHP.setText(String.valueOf(HP));
+        barHP.setProgress(HP/750);
+        statHP.setText(String.valueOf((int)HP));
         
-        barMP.setProgress(MP/700);
-        statMP.setText(String.valueOf(MP));
+        barMP.setProgress(MP/750);
+        statMP.setText(String.valueOf((int)MP));
         
-        barPAtk.setProgress(PAtk/100.0);
-        statPAtk.setText(String.valueOf(PAtk));
+        barPAtk.setProgress(PAtk/110.0);
+        statPAtk.setText(String.valueOf((int)PAtk));
         
-        barPDef.setProgress(PDef/100.0);
-        statPDef.setText(String.valueOf(PDef));
+        barPDef.setProgress(PDef/110.0);
+        statPDef.setText(String.valueOf((int)PDef));
         
-        barMAtk.setProgress(MAtk/100.0);
-        statMAtk.setText(String.valueOf(MAtk)); 
+        barMAtk.setProgress(MAtk/110.0);
+        statMAtk.setText(String.valueOf((int)MAtk)); 
 
-        barMDef.setProgress(MDef/100.0);
-        statMDef.setText(String.valueOf(MDef)); 
+        barMDef.setProgress(MDef/110.0);
+        statMDef.setText(String.valueOf((int)MDef)); 
         
-        barAtkS.setProgress(AtkS/100.0);
-        statAtkS.setText(String.valueOf(AtkS)); 
+        barAtkS.setProgress(AtkS/110.0);
+        statAtkS.setText(String.valueOf((int)AtkS)); 
 
-        barSta.setProgress(Sta/700);
-        statSta.setText(String.valueOf(Sta)); 
+        barSta.setProgress(Sta/750);
+        statSta.setText(String.valueOf((int)Sta));
 
-        barStaR.setProgress(StaR/100.0);
-        statStaR.setText(String.valueOf(StaR)); 
+        barStaR.setProgress(StaR/110.0);
+        statStaR.setText(String.valueOf((int)StaR)); 
 
-        barMPR.setProgress(MPR/100.0);
-        statMPR.setText(String.valueOf(MPR)); 
+        barMPR.setProgress(MPR/110.0);
+        statMPR.setText(String.valueOf((int)MPR)); 
 
-        barCrit.setProgress(Crit/100.0);
-        statCrit.setText(String.valueOf(Crit)); 
+        barCrit.setProgress(Crit/110.0);
+        statCrit.setText(String.valueOf((int)Crit)); 
 
         barStr.setProgress(disHero.getBaseStr()/15.0);
-        statStr.setText(String.valueOf(disHero.getBaseStr())); 
+        statStr.setText(String.valueOf((int)disHero.getBaseStr())); 
 
         barAgi.setProgress(disHero.getBaseAgi()/15.0);
-        statAgi.setText(String.valueOf(disHero.getBaseAgi()));  
+        statAgi.setText(String.valueOf((int)disHero.getBaseAgi()));  
 
         barDex.setProgress(disHero.getBaseDex()/15.0);
-        statDex.setText(String.valueOf(disHero.getBaseDex()));  
+        statDex.setText(String.valueOf((int)disHero.getBaseDex()));  
 
         barCon.setProgress(disHero.getBaseCon()/15.0);
-        statCon.setText(String.valueOf(disHero.getBaseCon()));  
+        statCon.setText(String.valueOf((int)disHero.getBaseCon()));  
 
         barInt.setProgress(disHero.getBaseInt()/15.0);
-        statInt.setText(String.valueOf(disHero.getBaseInt()));  
+        statInt.setText(String.valueOf((int)disHero.getBaseInt())); 
 
         barWis.setProgress(disHero.getBaseWis()/15.0);
-        statWis.setText(String.valueOf(disHero.getBaseWis()));  
+        statWis.setText(String.valueOf((int)disHero.getBaseWis())); 
 
         barLuck.setProgress(disHero.getBaseLuck()/15.0);
-        statLuck.setText(String.valueOf(disHero.getBaseLuck()));  
+        statLuck.setText(String.valueOf((int)disHero.getBaseLuck())); 
     }
     
     public void setSkill(){
         if(disHero.getSkill() != null) txtSkill.setText(disHero.getSkill());
         else txtSkill.setText("NONE");
+    }
+
+    @FXML
+    private void disKetSkill(MouseEvent event) {
+        String dis = disHero.getKetSkill();
+        showInfo("Skill", dis);
+    }
+
+    @FXML
+    private void disKetTanda(MouseEvent event) {
+        String dis = disHero.getDetilTanda();
+        showInfo("Birthsign", dis);
+    }
+
+    @FXML
+    private void disKetAgama(MouseEvent event) {
+        String dis = disHero.getDetilAgama();
+        showInfo("Religion", dis);
+    }
+    
+    @FXML
+    private void disKetKelas(MouseEvent event) {
+        String dis = disHero.getKetKelas();
+        showInfo("Class", dis);
+    }
+    
+    private void showInfo(String type, String dis){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(type+" Info");
+        if(dis == null) alert.setContentText("No Data");
+        else alert.setContentText(dis);
+        alert.showAndWait();
     }
 }

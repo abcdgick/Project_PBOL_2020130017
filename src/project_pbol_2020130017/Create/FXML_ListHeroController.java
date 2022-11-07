@@ -32,6 +32,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import project_pbol_2020130017.DB.HeroModel;
 import static project_pbol_2020130017.Main.stageMenu;
+import static project_pbol_2020130017.Main.volume;
 import static project_pbol_2020130017.Menu.MainMenuController.dtHero;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 import static project_pbol_2020130017.Menu.MainMenuController.music;
@@ -71,13 +72,17 @@ public class FXML_ListHeroController implements Initializable {
     private void newKlik(ActionEvent event) {
         try {
             java.sql.Date sqlDate = new java.sql.Date(new java.util.Date().getTime());
-            String id = "APARDB" + String.valueOf(dtHero.count());
+            String id = "APARDBAK" + String.valueOf(dtHero.count());
             FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_CreateHero.fxml"));
             Parent root = (Parent)loader.load();
             FXML_CreateHeroController isidt = (FXML_CreateHeroController)loader.getController();
-            isidt.buatBaru(id, "AP", "AR", "DB", "Hero", sqlDate);
+            isidt.buatBaru(id, "AP", "AR", "DB", "Hero", sqlDate, "AK");
             Scene scene = new Scene(root);
             Stage stg = new Stage();
+            
+            String css = this.getClass().getResource("Style2.css").toExternalForm();
+            scene.getStylesheets().add(css);
+            
             stg.initModality(Modality.APPLICATION_MODAL);
             stg.setResizable(false);
             stg.setIconified(false);
@@ -157,6 +162,7 @@ public class FXML_ListHeroController implements Initializable {
             
             music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
             mediaPlayer = new MediaPlayer(music);
+            mediaPlayer.setVolume(volume);
             mediaPlayer.play();
             
             Stage stage = (Stage) btnExitHero.getScene().getWindow();
@@ -188,6 +194,12 @@ public class FXML_ListHeroController implements Initializable {
             col = new TableColumn("Race Name");
             col.setCellValueFactory(new PropertyValueFactory<HeroModel, String>("namaRas"));
             listHero.getColumns().addAll(col);
+            col = new TableColumn("Religion ID");
+            col.setCellValueFactory(new PropertyValueFactory<HeroModel, String>("IDAgama"));
+            listHero.getColumns().addAll(col);
+            col = new TableColumn("Religion Name");
+            col.setCellValueFactory(new PropertyValueFactory<HeroModel, String>("namaAgama"));
+            listHero.getColumns().addAll(col);
             col = new TableColumn("Creation Date");
             col.setCellValueFactory(new PropertyValueFactory<HeroModel, Date>("creationDate"));
             listHero.getColumns().addAll(col);
@@ -203,6 +215,7 @@ public class FXML_ListHeroController implements Initializable {
     private void playAudio(){
         music = new Media(getClass().getResource("Create.mp4").toExternalForm()); 
         mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(volume * 0.8);
         mediaPlayer.play();
     }
 }

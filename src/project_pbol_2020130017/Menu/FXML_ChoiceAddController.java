@@ -59,9 +59,6 @@ public class FXML_ChoiceAddController implements Initializable {
 
     @FXML
     private void raceKlik(ActionEvent event) throws IOException {
-        
-        
-        System.out.println("Add Race");
         stopMenu();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListRas.fxml"));
@@ -79,8 +76,6 @@ public class FXML_ChoiceAddController implements Initializable {
 
     @FXML
     private void classKlik(ActionEvent event) throws IOException {
-        System.out.println("Add Kelas");
-        
         stopMenu();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListKelas.fxml"));
@@ -98,8 +93,6 @@ public class FXML_ChoiceAddController implements Initializable {
 
     @FXML
     private void tandaKlik(ActionEvent event) throws IOException {
-        System.out.println("Add Tanda");
-        
         stopMenu();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListTanda.fxml"));
@@ -117,8 +110,6 @@ public class FXML_ChoiceAddController implements Initializable {
     
     @FXML
     private void agamaKlik(ActionEvent event) throws IOException {
-        System.out.println("Add Tanda");
-        
         stopMenu();
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Add/FXML_ListAgama.fxml"));
@@ -136,8 +127,6 @@ public class FXML_ChoiceAddController implements Initializable {
 
     @FXML
     private void backKlik(ActionEvent event) throws IOException {
-        System.out.println("Go Back");
-        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/project_pbol_2020130017/Menu/FXML_Choice.fxml"));
         Parent root = loader.load();
         

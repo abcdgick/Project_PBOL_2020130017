@@ -33,11 +33,12 @@ public class DBHero {
             con.bukaKoneksi();
             con.statement = con.dbKoneksi.createStatement();
             ResultSet rs = con.statement.executeQuery("Select IDHero, namaHero, "
-                    + "IDTanda,  IDKelas, IDRas, creationDate, "
-                    + "namaTanda, namaKelas, namaRas "
+                    + "IDTanda,  IDKelas, IDRas, IDAgama, creationDate, "
+                    + "namaTanda, namaKelas, namaRas, namaAgama "
                     + "from hero inner join tanda using (IDTanda) "
                     + "inner join kelas using (IDKelas) "
-                    + "inner join ras using (IDRas)");
+                    + "inner join ras using (IDRas) "
+                    + "inner join agama using (IDAgama)");
             System.out.println("Bruhh");
             int i = 1;
             while(rs.next()){
@@ -47,11 +48,13 @@ public class DBHero {
                 d.setIDTanda(rs.getString("IDTanda"));
                 d.setIDKelas(rs.getString("IDKelas"));
                 d.setIDRas(rs.getString("IDRas"));
+                d.setIDAgama(rs.getString("IDAgama"));
                 d.setCreationDate(rs.getDate("creationDate"));
                 
                 d.setNamaTanda(rs.getString("namaTanda"));
                 d.setNamaKelas(rs.getString("namaKelas"));
                 d.setNamaRas(rs.getString("namaRas"));
+                d.setNamaAgama(rs.getString("namaAgama"));
                 
                 tableData.add(d);
                 i++;

@@ -116,7 +116,6 @@ public class MainMenuController implements Initializable {
 
     @FXML
     private void exitKlik(ActionEvent event) {
-        System.out.println("Quit");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quit");
         alert.setHeaderText("You're going to quit the game");

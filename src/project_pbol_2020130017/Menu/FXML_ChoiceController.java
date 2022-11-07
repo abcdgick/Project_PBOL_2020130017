@@ -53,8 +53,6 @@ public class FXML_ChoiceController implements Initializable {
 
     @FXML
     private void createKlik(ActionEvent event) throws IOException {
-        System.out.println("Create");
-        
         stageMenu.close();
         
         mediaPlayer.stop();
@@ -74,8 +72,6 @@ public class FXML_ChoiceController implements Initializable {
 
     @FXML
     private void addKlik(ActionEvent event) throws IOException {
-        System.out.println("Add Awal");
-        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_ChoiceAdd.fxml"));
         Parent root = loader.load();
         

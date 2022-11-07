@@ -18,7 +18,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     
-    public static double volume = 0.3;
+    public static double volume = 0.25;
     public static Stage stageMenu;
     
     @Override
