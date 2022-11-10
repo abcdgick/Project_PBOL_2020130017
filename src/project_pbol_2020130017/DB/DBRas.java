@@ -6,6 +6,7 @@ package project_pbol_2020130017.DB;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,6 +16,7 @@ import javafx.collections.ObservableList;
  */
 public class DBRas {
     private RasModel dt = new RasModel();
+    private HashMap<String, DetilModel> dt2 = new HashMap<>();
     
     public RasModel getRasModel(){
         return dt;
@@ -22,6 +24,14 @@ public class DBRas {
     
     public void setRasModel(RasModel n){
         dt = n;
+    }
+    
+    public HashMap<String, DetilModel> getDetilModel(){
+        return dt2;
+    }
+    
+    public void setDetilModel(DetilModel d){
+        dt2.put(d.getIDKelas(), d);
     }
     
     public ObservableList<RasModel> Load(){
@@ -53,6 +63,64 @@ public class DBRas {
             con.tutupKoneksi();
             return tableData;
         } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public ObservableList<DetilModel> LoadDetil(){
+        try {
+            ObservableList<DetilModel> tableData = FXCollections.observableArrayList();
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            dt2.clear();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("Select * from detil_ras_kelas join kelas using (IDKelas) where IDRas = '"+getRasModel().getIDRas()+"'");
+            int i = 1;
+            while(rs.next()){
+                DetilModel d = new DetilModel();
+                d.setIDRas(rs.getString("IDRas"));
+                d.setIDKelas(rs.getString("IDKelas"));
+                d.setBasedOf(rs.getString("basedOf"));
+                d.setNamaKelas(rs.getString("namaKelas"));
+                d.setKetKelas(rs.getString("ketKelas"));
+                d.setSkill(rs.getString("skill"));
+                d.setKetSkill(rs.getString("ketSkill"));
+                
+                d.setMinStr(rs.getInt("minStr"));
+                d.setMinAgi(rs.getInt("minAgi"));
+                d.setMinDex(rs.getInt("minDex"));
+                d.setMinCon(rs.getInt("minCon"));
+                d.setMinInt(rs.getInt("minInt"));
+                d.setMinWis(rs.getInt("minWis"));
+                d.setMinLuck(rs.getInt("minLuck"));
+                
+                d.setMaxStr(rs.getInt("maxStr"));
+                d.setMaxAgi(rs.getInt("maxAgi"));
+                d.setMaxDex(rs.getInt("maxDex"));
+                d.setMaxCon(rs.getInt("maxCon"));
+                d.setMaxInt(rs.getInt("maxInt"));
+                d.setMaxWis(rs.getInt("maxWis"));
+                d.setMaxLuck(rs.getInt("maxLuck"));
+                
+                d.setAddHP(rs.getInt("addHP"));
+                d.setAddMP(rs.getInt("addMP"));
+                d.setAddPAtk(rs.getInt("addPAtk"));
+                d.setAddPDef(rs.getInt("addPDef"));
+                d.setAddMAtk(rs.getInt("addMAtk"));
+                d.setAddMDef(rs.getInt("addMDef"));
+                d.setAddAtkS(rs.getInt("addAtkS"));
+                d.setAddSta(rs.getInt("addSta"));
+                d.setAddStaR(rs.getInt("addStaR"));
+                d.setAddMPR(rs.getInt("addMPR"));
+                d.setAddCrit(rs.getInt("addCrit"));
+                
+                tableData.add(d);
+                i++;
+            }
+            con.tutupKoneksi();
+            return tableData;
+        } catch (Exception e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -127,6 +195,10 @@ public class DBRas {
         Koneksi con = new Koneksi();
         try {
             con.bukaKoneksi();
+            con.preparedStatement = con.dbKoneksi.prepareStatement("delete from detil_ras_kelas where IDRas = ?");
+            con.preparedStatement.setString(1, ID);
+            con.preparedStatement.executeUpdate();
+            
             con.preparedStatement = con.dbKoneksi.prepareStatement("delete from ras where IDRas = ?");
             con.preparedStatement.setString(1, ID);
             con.preparedStatement.executeUpdate();
@@ -163,6 +235,94 @@ public class DBRas {
             con.preparedStatement.setString(9, getRasModel().getIDRas());
             
             con.preparedStatement.executeUpdate();
+            berhasil = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            berhasil = false;
+        } finally{
+            con.tutupKoneksi();
+            return berhasil;
+        }
+    }
+    
+    public boolean saveAll(){
+        boolean berhasil = false;
+        Koneksi con = new Koneksi();
+        try {
+            con.bukaKoneksi();
+            con.dbKoneksi.setAutoCommit(false);
+            con.preparedStatement = con.dbKoneksi.prepareStatement("Delete from ras where IDRas = ?");
+            con.preparedStatement.setString(1, getRasModel().getIDRas());
+            con.preparedStatement.executeUpdate();
+            
+            con.preparedStatement = con.dbKoneksi.prepareStatement("insert into ras("
+                    + "IDRas, namaRas, "
+                    + "baseStr, baseAgi, baseDex, baseCon, baseInt, baseWis, baseLuck) "
+                    + "values (?,?,?,?,?,?,?,?,?)");
+            
+            con.preparedStatement.setString(1, getRasModel().getIDRas());
+            con.preparedStatement.setString(2, getRasModel().getNamaRas());
+            
+            con.preparedStatement.setInt(3, getRasModel().getBaseStr());
+            con.preparedStatement.setInt(4, getRasModel().getBaseAgi());
+            con.preparedStatement.setInt(5, getRasModel().getBaseDex());
+            con.preparedStatement.setInt(6, getRasModel().getBaseCon());
+            con.preparedStatement.setInt(7, getRasModel().getBaseInt());
+            con.preparedStatement.setInt(8, getRasModel().getBaseWis());
+            con.preparedStatement.setInt(9, getRasModel().getBaseLuck());
+            
+            con.preparedStatement.executeUpdate();
+            
+            con.preparedStatement = con.dbKoneksi.prepareStatement("Delete from detil_ras_kelas where IDRas=?");
+            con.preparedStatement.setString(1, getRasModel().getIDRas());
+            con.preparedStatement.executeUpdate();
+            
+            for(DetilModel sm:dt2.values()){
+                con.preparedStatement = con.dbKoneksi.prepareStatement("insert into kelas("
+                    + "IDKelas, basedOf, namaKelas, ketKelas, skill, ketSkill, "
+                    + "minStr, minAgi, minDex, minCon, minInt, minWis, minLuck, "
+                    + "maxStr, maxAgi, maxDex, maxCon, maxInt, maxWis, maxLuck, "
+                    + "addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit) "
+                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            
+                con.preparedStatement.setString(1, sm.getIDKelas());
+                con.preparedStatement.setString(2, sm.getBasedOf());
+                con.preparedStatement.setString(3, sm.getNamaKelas());
+                con.preparedStatement.setString(4, sm.getKetKelas());
+                con.preparedStatement.setString(5, sm.getSkill());
+                con.preparedStatement.setString(6, sm.getKetSkill());
+
+                con.preparedStatement.setInt(7, sm.getMinStr());
+                con.preparedStatement.setInt(8, sm.getMinAgi());
+                con.preparedStatement.setInt(9, sm.getMinDex());
+                con.preparedStatement.setInt(10, sm.getMinCon());
+                con.preparedStatement.setInt(11, sm.getMinInt());
+                con.preparedStatement.setInt(12, sm.getMinWis());
+                con.preparedStatement.setInt(13, sm.getMinLuck());
+
+                con.preparedStatement.setInt(14, sm.getMaxStr());
+                con.preparedStatement.setInt(15, sm.getMaxAgi());
+                con.preparedStatement.setInt(16, sm.getMaxDex());
+                con.preparedStatement.setInt(17, sm.getMaxCon());
+                con.preparedStatement.setInt(18, sm.getMaxInt());
+                con.preparedStatement.setInt(19, sm.getMaxWis());
+                con.preparedStatement.setInt(20, sm.getMaxLuck());
+
+                con.preparedStatement.setInt(21, sm.getAddHP());
+                con.preparedStatement.setInt(22, sm.getAddMP());
+                con.preparedStatement.setInt(23, sm.getAddPAtk());
+                con.preparedStatement.setInt(24, sm.getAddPDef());
+                con.preparedStatement.setInt(25, sm.getAddMAtk());
+                con.preparedStatement.setInt(26, sm.getAddMDef());
+                con.preparedStatement.setInt(27, sm.getAddAtkS());
+                con.preparedStatement.setInt(28, sm.getAddSta());
+                con.preparedStatement.setInt(29, sm.getAddStaR());
+                con.preparedStatement.setInt(30, sm.getAddMPR());
+                con.preparedStatement.setInt(31, sm.getAddCrit());
+
+                con.preparedStatement.executeUpdate();
+            }
+            con.dbKoneksi.commit();
             berhasil = true;
         } catch (Exception e) {
             e.printStackTrace();

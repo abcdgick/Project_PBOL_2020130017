@@ -82,10 +82,9 @@ public class FXML_ListHeroController implements Initializable {
             
             String css = this.getClass().getResource("Style2.css").toExternalForm();
             scene.getStylesheets().add(css);
-            
-            stg.initModality(Modality.APPLICATION_MODAL);
+
             stg.setResizable(false);
-            stg.setIconified(false);
+
             stg.setScene(scene);
             stg.show();
             Stage stage = (Stage) btnExitHero.getScene().getWindow();
@@ -111,11 +110,9 @@ public class FXML_ListHeroController implements Initializable {
                 
                 String css = this.getClass().getResource("Style2.css").toExternalForm();
                 scene.getStylesheets().add(css);
-        
-                
-                stg.initModality(Modality.APPLICATION_MODAL);
+
                 stg.setResizable(false);
-                stg.setIconified(false);
+
                 stg.setScene(scene);
                 stg.show();
                 Stage stage = (Stage) btnExitHero.getScene().getWindow();

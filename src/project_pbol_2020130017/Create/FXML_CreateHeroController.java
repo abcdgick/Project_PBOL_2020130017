@@ -27,6 +27,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import project_pbol_2020130017.DB.AgamaModel;
+import project_pbol_2020130017.DB.DetilModel;
 import project_pbol_2020130017.DB.HeroModel;
 import project_pbol_2020130017.DB.KelasModel;
 import project_pbol_2020130017.DB.RasModel;
@@ -164,7 +165,7 @@ public class FXML_CreateHeroController implements Initializable {
     @FXML
     private Label txtWhat;
 
-    private boolean editData = false;
+    private boolean editData = false, boleh = true;
     
     private HeroModel disHero;
     
@@ -172,8 +173,9 @@ public class FXML_CreateHeroController implements Initializable {
     ObservableList<RasModel> listRas;
     ObservableList<TandaModel> listTanda;
     ObservableList<AgamaModel> listAgama;
+    ObservableList<DetilModel> listBoleh;
     
-    private int pilKelasDasar, pilRas, pilTanda, pilAgama, pilKelasAdv, kirikanan =0;
+    private int pilKelasDasar, pilRas, pilTanda, pilAgama, pilKelasAdv;
     
     private double HP, MP, PAtk, PDef, MAtk, MDef, AtkS, Sta, StaR, MPR, Crit;
     
@@ -187,87 +189,37 @@ public class FXML_CreateHeroController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     }    
 
-    //advClass1 -> kiri -> genap
-    //advClass2 -> kanan -> ganjil
+    //advClass1 -> kiri
+    //advClass2 -> kanan
     @FXML
     private void advClass1Klik(ActionEvent event) {
-        if(pilKelasAdv < listKelasAdv.size()){
-            if(kirikanan == 0){
-                pilKelasAdv = 0;
-                ambilKelasAdv2();
-                placeholder();
-            }
-            else if(kirikanan < 0) {
-                pilKelasAdv += 2;
-                ambilKelasAdv2();
-                placeholder();
-            } else {
-                pilKelasAdv -= 2;
-                if(pilKelasAdv == -1) {
-                    ambilKelasDasar();
-                    gantiImage();
-                }
-                else {
-                    ambilKelasAdv2();
-                    placeholder();
-                }
-            }
-            kirikanan--;
-            tampilKelas();
-            System.out.println("Kirii");
-            if(btnAdvClass2.isDisabled()) btnAdvClass2.setDisable(false);
-        } else {
-            btnAdvClass1.setDisable(true);
-        }
+        pilKelasAdv--;
+        if(pilKelasAdv < -1) pilKelasAdv = listKelasAdv.size() - 1;
+        rest();
     }
 
     @FXML
     private void advClass2Klik(ActionEvent event) {
-        if(pilKelasAdv < listKelasAdv.size()-1){
-            if(kirikanan == -1){
-                pilKelasAdv = -1;
-                ambilKelasDasar();
-                gantiImage();
-            }else if(kirikanan >= 0){
-                pilKelasAdv += 2;
-                ambilKelasAdv2();
-                placeholder();
-            }else{
-                pilKelasAdv -= 2;
-                ambilKelasAdv2();
-                placeholder();
-            }
-            kirikanan++;
-            tampilKelas();
-            System.out.println("Kanann");
-            if(btnAdvClass1.isDisabled()) btnAdvClass1.setDisable(false);
-         } else{
-            btnAdvClass2.setDisable(true);
-        }
+        pilKelasAdv++;
+        if(pilKelasAdv > listKelasAdv.size() - 1) pilKelasAdv = -1;
+        rest();
     }
 
     @FXML
     private void nextClassKlik(ActionEvent event) {
         pilKelasDasar++;
         if(pilKelasDasar > listKelasDasar.size() - 1) pilKelasDasar = 0;
-        ambilKelasDasar();
-        ambilKelasAdv(disHero.getIDKelas());
-        gantiImage();
+        
         pilKelasAdv = -1;
-        kirikanan = 0;
-        tampilKelas();
+        opKelas();
     }
 
     @FXML
     private void prevClassKlik(ActionEvent event) {
         pilKelasDasar--;
         if(pilKelasDasar < 0) pilKelasDasar = listKelasDasar.size() -1;
-        ambilKelasDasar();
-        ambilKelasAdv(disHero.getIDKelas());
-        gantiImage();
         pilKelasAdv = -1;
-        kirikanan = 0;
-        tampilKelas();
+        opKelas();
     }
 
     @FXML
@@ -336,8 +288,7 @@ public class FXML_CreateHeroController implements Initializable {
         pilRas++;
         if(pilRas > listRas.size() - 1) pilRas = 0;
         ambilRas();
-        if(pilKelasAdv != -1) placeholder();
-        else gantiImage();
+        gantiImage();
         tampilRas();
     }
     
@@ -346,8 +297,7 @@ public class FXML_CreateHeroController implements Initializable {
         pilRas--;
         if(pilRas < 0) pilRas = listRas.size() - 1 ;
         ambilRas();
-        if(pilKelasAdv != -1) placeholder();
-        else gantiImage();
+        gantiImage();
         tampilRas();
     }
     
@@ -384,19 +334,42 @@ public class FXML_CreateHeroController implements Initializable {
         tampilAgama();
     }
     
+    @FXML
+    private void disKetSkill(MouseEvent event) {
+        String dis = disHero.getKetSkill();
+        showInfo("Skill", dis);
+    }
+
+    @FXML
+    private void disKetTanda(MouseEvent event) {
+        String dis = disHero.getDetilTanda();
+        showInfo("Birthsign", dis);
+    }
+
+    @FXML
+    private void disKetAgama(MouseEvent event) {
+        String dis = disHero.getDetilAgama();
+        showInfo("Religion", dis);
+    }
+    
+    @FXML
+    private void disKetKelas(MouseEvent event) {
+        String dis = disHero.getKetKelas();
+        showInfo("Class", dis);
+    }
+    
     public void gantiImage(){
         File file = new File(pPath+"/"+disHero.getNamaKelas()+"/"+disHero.getNamaKelas()+" "+disHero.getNamaRas()+".png");
-        System.out.println(file);
+        
+        if(!file.exists()) {
+            file = new File(pPath+"/Placeholder.jpg");
+            nono();
+        }
+        
         Image image = new Image(file.toURI().toString());
         imageView.setImage(image);
     }
     
-    //method sementara karena belum ada many-to-many
-    public void placeholder(){
-        File file = new File(pPath+"/Placeholder.jpg");
-        Image image = new Image(file.toURI().toString());
-        imageView.setImage(image);
-    }
     
     public void buatBaru(String IDHero, String IDTanda, String IDKelas, String IDRas, String namaHero, Date creationDate, String IDAgama){
         disHero = new HeroModel(IDHero, IDTanda, IDKelas, IDRas, namaHero, creationDate, IDAgama);
@@ -430,7 +403,7 @@ public class FXML_CreateHeroController implements Initializable {
         pilTanda = (byte) listIDTanda.indexOf(disHero.getIDTanda());
         pilAgama = (byte) listIDAgama.indexOf(disHero.getIDAgama());
         pilRas = (byte) listIDRas.indexOf(disHero.getIDRas());
-        //pilKelasDasar = (byte) listIDKelas.indexOf(disHero.getIDKelas());
+
         System.out.println(dasar);
         if(dasar == null) {
             pilKelasDasar = (byte) listIDKelas.indexOf(disHero.getIDKelas());
@@ -440,9 +413,7 @@ public class FXML_CreateHeroController implements Initializable {
             ambilKelasAdv(dasar);
             for(int i = 0; i < listKelasAdv.size(); i++){
                 if(disHero.getIDKelas().equals(listKelasAdv.get(i).getIDKelas())) pilKelasAdv = (byte) (i);
-                placeholder();
-                if(pilKelasAdv % 2 == 1)kirikanan = (pilKelasAdv + 1) / 2; 
-                else kirikanan = pilKelasAdv/-2; 
+                gantiImage();
             }
         }
         pilRas = (byte) listIDRas.indexOf(disHero.getIDRas());
@@ -462,6 +433,8 @@ public class FXML_CreateHeroController implements Initializable {
         
         listAgama = MainMenuController.dtAgama.Load();
         ambilAgama();
+        
+        listBoleh = MainMenuController.dtRas.LoadDetil();
         
         //gantiImage();
         tampilTanda();
@@ -618,6 +591,39 @@ public class FXML_CreateHeroController implements Initializable {
         setSkill();
     }
     
+    public void setSkill(){
+        if(disHero.getSkill() != null) txtSkill.setText(disHero.getSkill());
+        else txtSkill.setText("NONE");
+    }
+    
+    private void opKelas(){
+        ambilKelasDasar();
+        ambilKelasAdv(disHero.getIDKelas());
+        gantiImage();
+        tampilKelas();
+    }
+    
+    private void rest(){
+        if(pilKelasAdv == -1) ambilKelasDasar();
+        else {
+            ambilKelasAdv2();
+        }
+        tampilKelas();
+        gantiImage();
+    }
+    
+    private void cek(){
+        
+    }
+    
+    public void nono(){
+        
+    }
+    
+    private void ambilBoleh(){
+        
+    }
+    
     private void kalkulasi(){
         HP = 0.6 * ((8 * disHero.getBaseCon() + 2 * disHero.getBaseStr())/0.15);
         MP = 0.6 * ((8 *disHero.getBaseInt() + 2 * disHero.getBaseWis())/0.15);
@@ -647,10 +653,10 @@ public class FXML_CreateHeroController implements Initializable {
     }
     
     private void tampilStat(){
-        barHP.setProgress(HP/750);
+        barHP.setProgress(HP/800);
         statHP.setText(String.valueOf((int)HP));
         
-        barMP.setProgress(MP/750);
+        barMP.setProgress(MP/800);
         statMP.setText(String.valueOf((int)MP));
         
         barPAtk.setProgress(PAtk/110.0);
@@ -702,34 +708,6 @@ public class FXML_CreateHeroController implements Initializable {
         statLuck.setText(String.valueOf((int)disHero.getBaseLuck())); 
     }
     
-    public void setSkill(){
-        if(disHero.getSkill() != null) txtSkill.setText(disHero.getSkill());
-        else txtSkill.setText("NONE");
-    }
-
-    @FXML
-    private void disKetSkill(MouseEvent event) {
-        String dis = disHero.getKetSkill();
-        showInfo("Skill", dis);
-    }
-
-    @FXML
-    private void disKetTanda(MouseEvent event) {
-        String dis = disHero.getDetilTanda();
-        showInfo("Birthsign", dis);
-    }
-
-    @FXML
-    private void disKetAgama(MouseEvent event) {
-        String dis = disHero.getDetilAgama();
-        showInfo("Religion", dis);
-    }
-    
-    @FXML
-    private void disKetKelas(MouseEvent event) {
-        String dis = disHero.getKetKelas();
-        showInfo("Class", dis);
-    }
     
     private void showInfo(String type, String dis){
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

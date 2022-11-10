@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import static project_pbol_2020130017.Main.stageMenu;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
@@ -66,6 +67,8 @@ public class FXML_ChoiceController implements Initializable {
         String css = this.getClass().getResource("/project_pbol_2020130017/Create/Style2.css").toExternalForm();
         scene.getStylesheets().add(css);
         
+        stage.setResizable(false);
+        
         stage.setScene(scene);
         stage.show();
     }
@@ -80,6 +83,8 @@ public class FXML_ChoiceController implements Initializable {
         
         String css = this.getClass().getResource("Style.css").toExternalForm();
         scene.getStylesheets().add(css);
+        
+        stage.setResizable(false);
         
         stage.setScene(scene);
         stage.show();
