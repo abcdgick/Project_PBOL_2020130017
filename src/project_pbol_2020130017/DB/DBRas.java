@@ -278,48 +278,11 @@ public class DBRas {
             con.preparedStatement.executeUpdate();
             
             for(DetilModel sm:dt2.values()){
-                con.preparedStatement = con.dbKoneksi.prepareStatement("insert into kelas("
-                    + "IDKelas, basedOf, namaKelas, ketKelas, skill, ketSkill, "
-                    + "minStr, minAgi, minDex, minCon, minInt, minWis, minLuck, "
-                    + "maxStr, maxAgi, maxDex, maxCon, maxInt, maxWis, maxLuck, "
-                    + "addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit) "
-                    + "values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-            
-                con.preparedStatement.setString(1, sm.getIDKelas());
-                con.preparedStatement.setString(2, sm.getBasedOf());
-                con.preparedStatement.setString(3, sm.getNamaKelas());
-                con.preparedStatement.setString(4, sm.getKetKelas());
-                con.preparedStatement.setString(5, sm.getSkill());
-                con.preparedStatement.setString(6, sm.getKetSkill());
-
-                con.preparedStatement.setInt(7, sm.getMinStr());
-                con.preparedStatement.setInt(8, sm.getMinAgi());
-                con.preparedStatement.setInt(9, sm.getMinDex());
-                con.preparedStatement.setInt(10, sm.getMinCon());
-                con.preparedStatement.setInt(11, sm.getMinInt());
-                con.preparedStatement.setInt(12, sm.getMinWis());
-                con.preparedStatement.setInt(13, sm.getMinLuck());
-
-                con.preparedStatement.setInt(14, sm.getMaxStr());
-                con.preparedStatement.setInt(15, sm.getMaxAgi());
-                con.preparedStatement.setInt(16, sm.getMaxDex());
-                con.preparedStatement.setInt(17, sm.getMaxCon());
-                con.preparedStatement.setInt(18, sm.getMaxInt());
-                con.preparedStatement.setInt(19, sm.getMaxWis());
-                con.preparedStatement.setInt(20, sm.getMaxLuck());
-
-                con.preparedStatement.setInt(21, sm.getAddHP());
-                con.preparedStatement.setInt(22, sm.getAddMP());
-                con.preparedStatement.setInt(23, sm.getAddPAtk());
-                con.preparedStatement.setInt(24, sm.getAddPDef());
-                con.preparedStatement.setInt(25, sm.getAddMAtk());
-                con.preparedStatement.setInt(26, sm.getAddMDef());
-                con.preparedStatement.setInt(27, sm.getAddAtkS());
-                con.preparedStatement.setInt(28, sm.getAddSta());
-                con.preparedStatement.setInt(29, sm.getAddStaR());
-                con.preparedStatement.setInt(30, sm.getAddMPR());
-                con.preparedStatement.setInt(31, sm.getAddCrit());
-
+                con.preparedStatement = con.dbKoneksi.prepareStatement("Insert into detil_ras_kelas("
+                    + "IDRas, IDKelas) values (?,?)");
+                con.preparedStatement.setString(1, sm.getIDRas());
+                con.preparedStatement.setString(2, sm.getIDKelas());
+                
                 con.preparedStatement.executeUpdate();
             }
             con.dbKoneksi.commit();
