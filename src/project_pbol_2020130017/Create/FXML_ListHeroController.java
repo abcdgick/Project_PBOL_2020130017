@@ -124,6 +124,7 @@ public class FXML_ListHeroController implements Initializable {
         } catch (Exception e) {
             Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a hero to edit", ButtonType.OK);
             a.showAndWait();
+            e.printStackTrace();
         }
     }
     

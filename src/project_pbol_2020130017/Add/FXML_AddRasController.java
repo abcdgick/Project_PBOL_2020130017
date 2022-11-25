@@ -27,10 +27,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import project_pbol_2020130017.DB.DetilModel;
 import project_pbol_2020130017.DB.RasModel;
 import static project_pbol_2020130017.Main.stageMenu;
 import static project_pbol_2020130017.Main.volume;
 import project_pbol_2020130017.Menu.MainMenuController;
+import static project_pbol_2020130017.Menu.MainMenuController.dtRas;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 import static project_pbol_2020130017.Menu.MainMenuController.music;
 
@@ -92,21 +94,9 @@ public class FXML_AddRasController implements Initializable {
         
         MainMenuController.dtRas.setRasModel(n);
         if(editData){
-            if(MainMenuController.dtRas.update()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION, "Race data has been updated",ButtonType.OK);
-                a.showAndWait();
-                txtRaceID.setEditable(true);
-            } else {
-                Alert a = new Alert(Alert.AlertType.ERROR, "Race hasn't been updated",ButtonType.OK);
-            }
+            konfirmasi("Race data has been updated", "Race hasn't been updated");
         } else if(MainMenuController.dtRas.validasi(n.getIDRas())<=0){
-            if(MainMenuController.dtRas.insert()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION,"New race has been created!",ButtonType.OK);
-                a.showAndWait();
-            } else {
-                Alert a = new Alert(Alert.AlertType.ERROR,"Race creation has failed",ButtonType.OK);
-                a.showAndWait();
-            }
+            konfirmasi("New race has been created!", "Race creation has failed");
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR,"Race already exists",ButtonType.OK);
             a.showAndWait();
@@ -134,24 +124,51 @@ public class FXML_AddRasController implements Initializable {
     }
         
     public void udahAda(RasModel d){
-            if(!d.getIDRas().isEmpty()){
-                editData=true;
-            
-                txtRaceID.setText(d.getIDRas());
-                txtRaceName.setText(d.getNamaRas()); 
-                
-                txtBaseStr.setText(String.valueOf(d.getBaseStr()));
-                txtBaseAgi.setText(String.valueOf(d.getBaseAgi()));
-                txtBaseDex.setText(String.valueOf(d.getBaseDex()));
-                txtBaseCon.setText(String.valueOf(d.getBaseCon()));
-                txtBaseInt.setText(String.valueOf(d.getBaseInt()));
-                txtBaseWis.setText(String.valueOf(d.getBaseWis()));
-                txtBaseLuck.setText(String.valueOf(d.getBaseLuck()));
+        if(!d.getIDRas().isEmpty()){
+            editData=true;
 
-            
-                txtRaceID.setEditable(false);
+            txtRaceID.setText(d.getIDRas());
+            txtRaceName.setText(d.getNamaRas()); 
+
+            txtBaseStr.setText(String.valueOf(d.getBaseStr()));
+            txtBaseAgi.setText(String.valueOf(d.getBaseAgi()));
+            txtBaseDex.setText(String.valueOf(d.getBaseDex()));
+            txtBaseCon.setText(String.valueOf(d.getBaseCon()));
+            txtBaseInt.setText(String.valueOf(d.getBaseInt()));
+            txtBaseWis.setText(String.valueOf(d.getBaseWis()));
+            txtBaseLuck.setText(String.valueOf(d.getBaseLuck()));
+
+
+            txtRaceID.setEditable(false);
+        }
+    }
+    
+    private void konfirmasi(String success, String error){
+        ObservableList<DetilModel> data = dtRas.CekDetil();
+        String header, list = "";
+        if(data != null){
+            header = "Advanced class that "+txtRaceName.getText()+" can take: \n";
+            for(int i = 0; i<data.size(); i++){
+                list+= (i+1) + ". "+data.get(i).getNamaKelas()+"\n";
             }
+        }else{
+            header = "Race "+txtRaceName.getText()+" can only take basic class";
+        }
         
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are You Sure?");
+        alert.setHeaderText(header);
+        alert.setContentText(list);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.OK){
+            if(MainMenuController.dtRas.saveAll()){
+                Alert a = new Alert(Alert.AlertType.INFORMATION,success,ButtonType.OK);
+                a.showAndWait();
+            } else {
+                Alert a = new Alert(Alert.AlertType.ERROR,error,ButtonType.OK);
+                a.showAndWait();
+            }
+        }
     }
     
 }

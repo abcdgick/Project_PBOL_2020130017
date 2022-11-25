@@ -5,9 +5,6 @@
 package project_pbol_2020130017.DB;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -39,7 +36,6 @@ public class DBHero {
                     + "inner join kelas using (IDKelas) "
                     + "inner join ras using (IDRas) "
                     + "inner join agama using (IDAgama)");
-            System.out.println("Bruhh");
             int i = 1;
             while(rs.next()){
                 HeroModel d = new HeroModel();
@@ -104,8 +100,8 @@ public class DBHero {
             con.bukaKoneksi();
             con.preparedStatement = con.dbKoneksi.prepareStatement("insert into hero("
                     + "IDHero, namaHero, "
-                    + "IDTanda, IDKelas, IDRas, creationDate) "
-                    + "values (?,?,?,?,?,?)");
+                    + "IDTanda, IDKelas, IDRas, creationDate, IDAgama) "
+                    + "values (?,?,?,?,?,?,?)");
             
             con.preparedStatement.setString(1, getHeroModel().getIDHero());
             con.preparedStatement.setString(2, getHeroModel().getNamaHero());
@@ -113,6 +109,7 @@ public class DBHero {
             con.preparedStatement.setString(4, getHeroModel().getIDKelas());
             con.preparedStatement.setString(5, getHeroModel().getIDRas());
             con.preparedStatement.setDate(6, getHeroModel().getCreationDate());
+            con.preparedStatement.setString(7, getHeroModel().getIDAgama());
             
             con.preparedStatement.executeUpdate();
             berhasil = true;
@@ -149,7 +146,7 @@ public class DBHero {
         try {
             con.bukaKoneksi();
             con.preparedStatement = con.dbKoneksi.prepareStatement("update hero set "
-                    + "namaHero=?, IDTanda=?, IDKelas=?, IDRas=? "
+                    + "namaHero=?, IDTanda=?, IDKelas=?, IDRas=?, IDAgama=? "
                     + "where IDHero = ?");
             
             con.preparedStatement.setString(1, getHeroModel().getNamaHero());
@@ -157,7 +154,8 @@ public class DBHero {
             con.preparedStatement.setString(2, getHeroModel().getIDTanda());
             con.preparedStatement.setString(3, getHeroModel().getIDKelas());
             con.preparedStatement.setString(4, getHeroModel().getIDRas());
-            con.preparedStatement.setString(5, getHeroModel().getIDHero());
+            con.preparedStatement.setString(5, getHeroModel().getIDAgama());
+            con.preparedStatement.setString(6, getHeroModel().getIDHero());
             
             con.preparedStatement.executeUpdate();
             berhasil = true;
@@ -167,10 +165,6 @@ public class DBHero {
         } finally{
             con.tutupKoneksi();
             return berhasil;
-        }
-        
-        
+        }   
     }
-    
-    
 }

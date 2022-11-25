@@ -227,14 +227,18 @@ public class FXML_CreateHeroController implements Initializable {
 
     @FXML
     private void createHeroKlik(ActionEvent event) {
+        if(!boleh){
+            Alert a = new Alert(Alert.AlertType.ERROR, "The selected race cannot be assign to this class",ButtonType.OK);
+            a.showAndWait();
+            return;
+        }
         String nama = txtNamaHero.getText();
-        System.out.print(disHero.getIDKelas());
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Are You Sure?");
         alert.setHeaderText("The data that you selected will be recorded");
         alert.setContentText("This action will also close this window");
         alert.showAndWait();
-        if(alert.getResult()==ButtonType.YES){
+        if(alert.getResult()==ButtonType.OK){
             disHero.setNamaHero(nama);
             MainMenuController.dtHero.setHeroModel(disHero);
             System.out.println(disHero.getCreationDate());
@@ -279,7 +283,7 @@ public class FXML_CreateHeroController implements Initializable {
         if(pilRas > listRas.size() - 1) pilRas = 0;
         ambilRas();
         ambilBoleh();
-        ambilKelasAdv2();
+        if(pilKelasAdv != -1) ambilKelasAdv2();
         gantiImage();
         tampilRas();
     }
@@ -290,7 +294,7 @@ public class FXML_CreateHeroController implements Initializable {
         if(pilRas < 0) pilRas = listRas.size() - 1 ;
         ambilRas();
         ambilBoleh();
-        ambilKelasAdv2();
+        if(pilKelasAdv != -1) ambilKelasAdv2();
         gantiImage();
         tampilRas();
     }
@@ -392,7 +396,7 @@ public class FXML_CreateHeroController implements Initializable {
     
     public void search(){
         ObservableList<String> listIDTanda = MainMenuController.dtTanda.getIDTanda();
-        ObservableList<String> listIDKelas = MainMenuController.dtKelas.getIDKelas();
+        ObservableList<String> listIDKD = MainMenuController.dtKelas.getIDKelasDasar();
         ObservableList<String> listIDRas = MainMenuController.dtRas.getIDRas();
         ObservableList<String> listIDAgama = MainMenuController.dtAgama.getIDAgama();
         
@@ -401,24 +405,30 @@ public class FXML_CreateHeroController implements Initializable {
         pilAgama = (byte) listIDAgama.indexOf(disHero.getIDAgama());
         pilRas = (byte) listIDRas.indexOf(disHero.getIDRas());
 
-        System.out.println(dasar);
         if(dasar == null) {
-            pilKelasDasar = (byte) listIDKelas.indexOf(disHero.getIDKelas());
+            pilKelasDasar = (byte) listIDKD.indexOf(disHero.getIDKelas());
             pilKelasAdv = -1;
             gantiImage();
         } else {
+            dtRas.getRasModel().setIDRas(disHero.getIDRas());
+            listBoleh =  dtRas.LoadDetil();
             ambilKelasAdv(dasar);
             for(int i = 0; i < listKelasAdv.size(); i++){
-                if(disHero.getIDKelas().equals(listKelasAdv.get(i).getIDKelas())) pilKelasAdv = (byte) (i);
-                gantiImage();
+                if(disHero.getIDKelas().equals(listKelasAdv.get(i).getIDKelas())) {
+                    pilKelasAdv = (byte) (i); 
+                    break;
+                } 
             }
+            ambilKelasAdv2();
+            pilKelasDasar = (byte) listIDKD.indexOf(disHero.getBasedOf());
+            gantiImage();
         }
         pilRas = (byte) listIDRas.indexOf(disHero.getIDRas());
     }
     
     public void pondasi(){
         listKelasDasar = MainMenuController.dtKelas.basedOf("is null");
-        ambilKelasDasar();
+        if(pilKelasAdv == -1) ambilKelasDasar();
         
         ambilBoleh();
         
@@ -657,7 +667,6 @@ public class FXML_CreateHeroController implements Initializable {
         dtRas.getRasModel().setIDRas(disHero.getIDRas());
         listBoleh =  dtRas.LoadDetil();
         ambilKelasAdv(listKelasDasar.get(pilKelasDasar).getIDKelas());
-        System.out.println(listKelasDasar.get(pilKelasDasar).getIDKelas());
     }
     
     private void kalkulasi(){

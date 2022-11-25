@@ -115,6 +115,7 @@ public class DBRas {
                 d.setAddCrit(rs.getInt("addCrit"));
                 
                 tableData.add(d);
+                setDetilModel(d);
                 i++;
             }
             con.tutupKoneksi();
@@ -242,6 +243,73 @@ public class DBRas {
         } finally{
             con.tutupKoneksi();
             return berhasil;
+        }
+    }
+    
+    public ObservableList<DetilModel> CekDetil(){
+        String query = "Select * from kelas where ('"+getRasModel().getBaseStr()+"' between minStr and maxStr) and "
+                + "('"+getRasModel().getBaseAgi()+"' between minAgi and maxAgi) and "
+                + "('"+getRasModel().getBaseDex()+"' between minDex and maxDex) and "
+                + "('"+getRasModel().getBaseCon()+"' between minCon and maxCon) and "
+                + "('"+getRasModel().getBaseInt()+"' between minInt and maxInt) and "
+                + "('"+getRasModel().getBaseWis()+"' between minWis and maxWis) and "
+                + "('"+getRasModel().getBaseLuck()+"' between minLuck and maxLuck) "
+                + "and (basedOf is not null)";
+        try {
+            ObservableList<DetilModel> tableData = FXCollections.observableArrayList();
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            dt2.clear();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery(query);
+            int i = 1;
+            while(rs.next()){
+                DetilModel d = new DetilModel();
+                d.setIDRas(getRasModel().getIDRas());
+                d.setIDKelas(rs.getString("IDKelas"));
+                d.setBasedOf(rs.getString("basedOf"));
+                d.setNamaKelas(rs.getString("namaKelas"));
+                d.setKetKelas(rs.getString("ketKelas"));
+                d.setSkill(rs.getString("skill"));
+                d.setKetSkill(rs.getString("ketSkill"));
+                
+                d.setMinStr(rs.getInt("minStr"));
+                d.setMinAgi(rs.getInt("minAgi"));
+                d.setMinDex(rs.getInt("minDex"));
+                d.setMinCon(rs.getInt("minCon"));
+                d.setMinInt(rs.getInt("minInt"));
+                d.setMinWis(rs.getInt("minWis"));
+                d.setMinLuck(rs.getInt("minLuck"));
+                
+                d.setMaxStr(rs.getInt("maxStr"));
+                d.setMaxAgi(rs.getInt("maxAgi"));
+                d.setMaxDex(rs.getInt("maxDex"));
+                d.setMaxCon(rs.getInt("maxCon"));
+                d.setMaxInt(rs.getInt("maxInt"));
+                d.setMaxWis(rs.getInt("maxWis"));
+                d.setMaxLuck(rs.getInt("maxLuck"));
+                
+                d.setAddHP(rs.getInt("addHP"));
+                d.setAddMP(rs.getInt("addMP"));
+                d.setAddPAtk(rs.getInt("addPAtk"));
+                d.setAddPDef(rs.getInt("addPDef"));
+                d.setAddMAtk(rs.getInt("addMAtk"));
+                d.setAddMDef(rs.getInt("addMDef"));
+                d.setAddAtkS(rs.getInt("addAtkS"));
+                d.setAddSta(rs.getInt("addSta"));
+                d.setAddStaR(rs.getInt("addStaR"));
+                d.setAddMPR(rs.getInt("addMPR"));
+                d.setAddCrit(rs.getInt("addCrit"));
+                
+                tableData.add(d);
+                setDetilModel(d);
+                i++;
+            }
+            con.tutupKoneksi();
+            return tableData;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
     

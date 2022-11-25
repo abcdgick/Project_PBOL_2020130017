@@ -102,6 +102,24 @@ public class DBKelas {
         }
     }
     
+    public ObservableList<String> getIDKelasDasar(){
+        try {
+            ObservableList<String> listID = FXCollections.observableArrayList();
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("Select IDKelas from kelas where basedOf is null");
+            while(rs.next()){
+                listID.add(rs.getString("IDKelas"));
+            }
+            con.tutupKoneksi();
+            return listID;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return null;
+        }
+    }
+    
     public int validasi(String ID){
         int val = 0;
         try {
@@ -259,7 +277,7 @@ public class DBKelas {
             Koneksi con = new Koneksi();
             con.bukaKoneksi();
             con.statement = con.dbKoneksi.createStatement();
-            ResultSet rs = con.statement.executeQuery("Select IDKelas, namaKelas, ketKelas, skill, ketSkill, "
+            ResultSet rs = con.statement.executeQuery("Select IDKelas, basedOf, namaKelas, ketKelas, skill, ketSkill, "
                     + "minStr, minAgi, minDex, minCon, minInt, minWis, minLuck, "
                     + "maxStr, maxAgi, maxDex, maxCon, maxInt, maxWis, maxLuck, "
                     + "addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit "
@@ -300,6 +318,8 @@ public class DBKelas {
                 d.setAddStaR(rs.getInt("addStaR"));
                 d.setAddMPR(rs.getInt("addMPR"));
                 d.setAddCrit(rs.getInt("addCrit"));
+                
+                d.setBasedOf(rs.getString("basedOf"));
                 
                 tableData.add(d);
                 i++;
