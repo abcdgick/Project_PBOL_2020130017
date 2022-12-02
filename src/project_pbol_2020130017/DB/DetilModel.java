@@ -9,10 +9,11 @@ package project_pbol_2020130017.DB;
  * @author acer
  */
 public class DetilModel {
-    private String IDRas, IDKelas, basedOf, namaKelas, ketKelas, skill, ketSkill;
+    private String IDRas, IDKelas, basedOf, namaKelas, namaRas, ketKelas, skill, ketSkill;
     private int minStr, minAgi, minDex, minCon, minInt, minWis, minLuck;
     private int maxStr, maxAgi, maxDex, maxCon, maxInt, maxWis, maxLuck;
     private int addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit;
+    private int baseStr, baseAgi, baseDex, baseCon, baseInt, baseWis, baseLuck;
 
     public DetilModel() {
     }
@@ -66,6 +67,10 @@ public class DetilModel {
 
     public void setIDKelas(String IDKelas) {
         this.IDKelas = IDKelas;
+    }
+    
+    public String getNamaRas() {
+        return namaRas;
     }
 
     public String getBasedOf() {
@@ -306,6 +311,66 @@ public class DetilModel {
 
     public void setAddCrit(int addCrit) {
         this.addCrit = addCrit;
+    }
+
+    public void setNamaRas(String namaRas) {
+        this.namaRas = namaRas;
+    }
+
+    public int getBaseStr() {
+        return baseStr;
+    }
+
+    public void setBaseStr(int baseStr) {
+        this.baseStr = baseStr;
+    }
+
+    public int getBaseAgi() {
+        return baseAgi;
+    }
+
+    public void setBaseAgi(int baseAgi) {
+        this.baseAgi = baseAgi;
+    }
+
+    public int getBaseDex() {
+        return baseDex;
+    }
+
+    public void setBaseDex(int baseDex) {
+        this.baseDex = baseDex;
+    }
+
+    public int getBaseCon() {
+        return baseCon;
+    }
+
+    public void setBaseCon(int baseCon) {
+        this.baseCon = baseCon;
+    }
+
+    public int getBaseInt() {
+        return baseInt;
+    }
+
+    public void setBaseInt(int baseInt) {
+        this.baseInt = baseInt;
+    }
+
+    public int getBaseWis() {
+        return baseWis;
+    }
+
+    public void setBaseWis(int baseWis) {
+        this.baseWis = baseWis;
+    }
+
+    public int getBaseLuck() {
+        return baseLuck;
+    }
+
+    public void setBaseLuck(int baseLuck) {
+        this.baseLuck = baseLuck;
     }
     
     

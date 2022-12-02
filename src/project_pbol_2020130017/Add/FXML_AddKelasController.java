@@ -7,6 +7,7 @@ package project_pbol_2020130017.Add;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -27,10 +30,12 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import project_pbol_2020130017.DB.DetilModel;
 import project_pbol_2020130017.DB.KelasModel;
 import static project_pbol_2020130017.Main.stageMenu;
 import static project_pbol_2020130017.Main.volume;
 import project_pbol_2020130017.Menu.MainMenuController;
+import static project_pbol_2020130017.Menu.MainMenuController.dtKelas;
 import static project_pbol_2020130017.Menu.MainMenuController.mediaPlayer;
 import static project_pbol_2020130017.Menu.MainMenuController.music;
 
@@ -108,14 +113,25 @@ public class FXML_AddKelasController implements Initializable {
     private TextArea txtSkillDetail;
     @FXML
     private TextField txtSkill;
+    @FXML
+    private CheckBox cbKelas;
+    @FXML
+    private ComboBox<String> cmbBased;
         
     private boolean editData = false;
+    private boolean basic;
+    private ArrayList<String> idKelas = new ArrayList<>();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        getBased();
+        cmbBased.setDisable(true);
+        txtSkill.setDisable(true);
+        txtSkillDetail.setDisable(true);
+        cbKelas.setSelected(true);
+        basic = true;
     }    
 
     @FXML
@@ -127,6 +143,11 @@ public class FXML_AddKelasController implements Initializable {
         n.setKetKelas(txtClassDetail.getText());
         n.setSkill(txtSkill.getText());
         n.setKetSkill(txtSkillDetail.getText());
+        
+        if(!cmbBased.isDisabled()) {
+            int i = cmbBased.getSelectionModel().getSelectedIndex();
+            n.setBasedOf(idKelas.get(i));
+        }
 
         n.setMinStr(Integer.parseInt(txtMinStr.getText()));
         n.setMinAgi(Integer.parseInt(txtMinAgi.getText()));
@@ -159,21 +180,9 @@ public class FXML_AddKelasController implements Initializable {
         
         MainMenuController.dtKelas.setKelasModel(n);
         if(editData){
-            if(MainMenuController.dtKelas.update()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION, "Class data has been updated",ButtonType.OK);
-                a.showAndWait();
-                txtClassID.setEditable(true);
-            } else {
-                Alert a = new Alert(Alert.AlertType.ERROR, "Class hasn't been updated",ButtonType.OK);
-            }
+            konfirmasi("Class data has been updated", "Class hasn't been updated");
         } else if(MainMenuController.dtKelas.validasi(n.getIDKelas())<=0){
-            if(MainMenuController.dtKelas.insert()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION,"New class has been created!",ButtonType.OK);
-                a.showAndWait();
-            } else {
-                Alert a = new Alert(Alert.AlertType.ERROR,"Class creation has failed",ButtonType.OK);
-                a.showAndWait();
-            }
+            konfirmasi("New class has been created!", "Class creation has failed");
         } else {
             Alert a = new Alert(Alert.AlertType.ERROR,"Class already exists",ButtonType.OK);
             a.showAndWait();
@@ -199,6 +208,14 @@ public class FXML_AddKelasController implements Initializable {
             Stage stage = (Stage) btnExit.getScene().getWindow();
             stage.close();
         }
+    }
+    
+    @FXML
+    private void basicKlik(ActionEvent event) {
+        basic = cbKelas.isSelected();
+        cmbBased.setDisable(basic);
+        txtSkill.setDisable(basic);
+        txtSkillDetail.setDisable(basic);
     }
     
     public void udahAda(KelasModel d){
@@ -236,12 +253,75 @@ public class FXML_AddKelasController implements Initializable {
             txtMaxInt.setText(String.valueOf(d.getMaxInt()));
             txtMaxWis.setText(String.valueOf(d.getMaxWis()));
             txtMaxLuck.setText(String.valueOf(d.getMaxLuck()));
-
-            txtSkill.setText(String.valueOf(d.getSkill()));
-            txtSkillDetail.setText(String.valueOf(d.getKetSkill()));
+            
+            if(d.getBasedOf() != null){
+                basic = false;
+                cbKelas.setSelected(basic);
+                cmbBased.setDisable(basic);
+                txtSkill.setDisable(basic);
+                txtSkillDetail.setDisable(basic);
+                txtSkill.setText(String.valueOf(d.getSkill()));
+                txtSkillDetail.setText(String.valueOf(d.getKetSkill()));
+            } else{
+                basic = true;
+                cbKelas.setSelected(basic);
+                cmbBased.setDisable(basic);
+                txtSkill.setDisable(basic);
+                txtSkillDetail.setDisable(basic);
+            }
             
             
             txtClassID.setEditable(false);
+        }
+    }
+    
+    private void konfirmasi(String success, String error){
+        String header, list = "";
+        if(basic){
+            header = "Class "+txtClassName.getText()+" is a basic class";
+        } else{
+            ObservableList<DetilModel> data = dtKelas.CekDetil();
+            if(data != null){
+                header = "Race that can take class "+txtClassName.getText()+" : \n";
+                for(int i = 0; i<data.size(); i++){
+                    list+= (i+1) + ". "+data.get(i).getNamaRas()+"\n";
+            }
+            }else{
+                header = "This class cannot be taken by any race";
+            }
+        }
+        
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Are You Sure?");
+        alert.setHeaderText(header);
+        alert.setContentText(list);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.OK){
+            if(basic){
+                if(MainMenuController.dtKelas.insert()){
+                    Alert a = new Alert(Alert.AlertType.INFORMATION,success,ButtonType.OK);
+                    a.showAndWait();
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR,error,ButtonType.OK);
+                    a.showAndWait();
+                }
+            } else{
+                if(MainMenuController.dtKelas.saveAll()){
+                    Alert a = new Alert(Alert.AlertType.INFORMATION,success,ButtonType.OK);
+                    a.showAndWait();
+                } else {
+                    Alert a = new Alert(Alert.AlertType.ERROR,error,ButtonType.OK);
+                    a.showAndWait();
+                }
+            }
+        }
+    }
+    
+    private void getBased(){
+        ObservableList<KelasModel> data = dtKelas.basedOf("is null");
+        for(KelasModel k:data){
+            idKelas.add(k.getIDKelas());
+            cmbBased.getItems().addAll(k.getNamaKelas());
         }
     }
 }

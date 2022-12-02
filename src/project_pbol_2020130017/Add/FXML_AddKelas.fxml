@@ -175,23 +175,34 @@
       <TextField fx:id="txtClassID" layoutX="536.0" layoutY="40.0" />
       <TextField fx:id="txtClassName" layoutX="536.0" layoutY="80.0" />
       <TextField fx:id="txtAddMDef" layoutX="270.0" layoutY="290.0" prefHeight="25.0" prefWidth="50.0" />
-      <Label layoutX="434.0" layoutY="448.0" text="Class Detail" textFill="WHITE">
+      <Label layoutX="607.0" layoutY="436.0" text="Class Detail" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="txtClassDetail" layoutX="581.0" layoutY="441.0" prefHeight="40.0" prefWidth="365.0" />
-      <Label layoutX="390.0" layoutY="381.0" text="Skill" textFill="WHITE">
+      <TextArea fx:id="txtClassDetail" layoutX="716.0" layoutY="423.0" prefHeight="50.0" prefWidth="230.0" />
+      <Label layoutX="390.0" layoutY="360.0" text="Skill" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="610.0" layoutY="380.0" text="Skill Detail" textFill="WHITE">
+      <Label layoutX="610.0" layoutY="372.0" text="Skill Detail" textFill="WHITE">
          <font>
             <Font name="Comic Sans MS Bold" size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="txtSkillDetail" layoutX="715.0" layoutY="359.0" prefHeight="66.0" prefWidth="231.0" />
-      <TextField fx:id="txtSkill" layoutX="439.0" layoutY="381.0" />
+      <TextArea fx:id="txtSkillDetail" layoutX="715.0" layoutY="359.0" prefHeight="50.0" prefWidth="230.0" />
+      <TextField fx:id="txtSkill" layoutX="439.0" layoutY="360.0" />
+      <Label layoutX="349.0" layoutY="440.0" text="Based Of" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </Label>
+      <CheckBox fx:id="cbKelas" layoutX="390.0" layoutY="400.0" mnemonicParsing="false" onAction="#basicKlik" selected="true" text="Basic Class" textFill="WHITE">
+         <font>
+            <Font name="Comic Sans MS Bold" size="18.0" />
+         </font>
+      </CheckBox>
+      <ComboBox fx:id="cmbBased" disable="true" layoutX="438.0" layoutY="440.0" prefWidth="150.0" />
    </children>
 </AnchorPane>
