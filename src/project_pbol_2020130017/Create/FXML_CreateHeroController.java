@@ -631,7 +631,7 @@ public class FXML_CreateHeroController implements Initializable {
 
         music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
         mediaPlayer = new MediaPlayer(music);
-        mediaPlayer.setVolume(volume);
+        mediaPlayer.setVolume(volume * 0.8);
         mediaPlayer.play();
 
         Stage stage = (Stage) btnQuitHero.getScene().getWindow();

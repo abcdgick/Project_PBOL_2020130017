@@ -56,6 +56,8 @@ public class FXML_ListHeroController implements Initializable {
     private Button btnExitHero;
     @FXML
     private Button btnDelete;
+    @FXML
+    private Button btnPlay;
 
     //private ArrayList <Image> imageList;
     /**
@@ -66,6 +68,39 @@ public class FXML_ListHeroController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         showData();
         playAudio();
+    }
+
+    @FXML
+    private void playKlik(ActionEvent event) {
+        try {
+            HeroModel s = new HeroModel();
+            s=listHero.getSelectionModel().getSelectedItem();
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("FXML_PlayHero.fxml"));
+                Parent root = (Parent)loader.load();
+                FXML_PlayHeroController isidt = (FXML_PlayHeroController)loader.getController();
+                isidt.transfer(s);
+                Scene scene = new Scene(root);
+                Stage stg = new Stage();
+                
+                String css = this.getClass().getResource("Style2.css").toExternalForm();
+                scene.getStylesheets().add(css);
+
+                stg.setResizable(false);
+
+                stg.setScene(scene);
+                stg.show();
+                Stage stage = (Stage) btnExitHero.getScene().getWindow();
+                stage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            showData();
+        } catch (Exception e) {
+            Alert a = new Alert(Alert.AlertType.ERROR,"You haven't select a hero to edit", ButtonType.OK);
+            a.showAndWait();
+            e.printStackTrace();
+        }
     }    
 
     @FXML

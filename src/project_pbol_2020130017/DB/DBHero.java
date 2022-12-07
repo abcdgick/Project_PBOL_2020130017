@@ -63,6 +63,86 @@ public class DBHero {
         }
     }
     
+    public HeroModel LoadOne(String IDHero){
+        try {
+            Koneksi con = new Koneksi();
+            con.bukaKoneksi();
+            con.statement = con.dbKoneksi.createStatement();
+            ResultSet rs = con.statement.executeQuery("Select namaHero, "
+                    + "namaTanda, namaKelas, namaRas, namaAgama, skill, "
+                    + "addHP, addMP, addPAtk, addPDef, addMAtk, addMDef, addAtkS, addSta, addStaR, addMPR, addCrit, "
+                    + "a.buffHP, a.buffMP, a.buffPAtk, a.buffPDef, a.buffMAtk, a.buffMDef, a.buffAtkS, a.buffSta, a.buffStaR, a.buffMPR, a.buffCrit, "
+                    + "baseStr, baseAgi, baseDex, baseCon, baseInt, baseWis, baseLuck, "
+                    + "t.buffHP, t.buffMP, t.buffPAtk, t.buffPDef, t.buffMAtk, t.buffMDef, t.buffAtkS, t.buffSta, t.buffStaR, t.buffMPR, t.buffCrit "
+                    + "from hero inner join tanda as t using (IDTanda) "
+                    + "inner join kelas as k using (IDKelas) "
+                    + "inner join ras as r using (IDRas) "
+                    + "inner join agama as a using (IDAgama) "
+                    + "where IDHero = '"+IDHero+"'");
+            
+            rs.next();
+            HeroModel d = new HeroModel();
+            
+            d.setNamaHero(rs.getString("namaHero"));
+
+            d.setNamaTanda(rs.getString("namaTanda"));
+            d.setNamaKelas(rs.getString("namaKelas"));
+            d.setNamaRas(rs.getString("namaRas"));
+            d.setNamaAgama(rs.getString("namaAgama"));
+            d.setSkill(rs.getString("skill"));
+            
+            d.setBuffHP2(rs.getInt("a.buffHP"));
+            d.setBuffMP2(rs.getInt("a.buffMP"));
+            d.setBuffPAtk2(rs.getInt("a.buffPAtk"));
+            d.setBuffPDef2(rs.getInt("a.buffPDef"));
+            d.setBuffMAtk2(rs.getInt("a.buffMAtk"));
+            d.setBuffMDef2(rs.getInt("a.buffMDef"));
+            d.setBuffAtkS2(rs.getInt("a.buffAtkS"));
+            d.setBuffSta2(rs.getInt("a.buffSta"));
+            d.setBuffStaR2(rs.getInt("a.buffStaR"));
+            d.setBuffMPR2(rs.getInt("a.buffMPR"));
+            d.setBuffCrit2(rs.getInt("a.buffCrit"));
+            
+            d.setAddHP(rs.getInt("addHP"));
+            d.setAddMP(rs.getInt("addMP"));
+            d.setAddPAtk(rs.getInt("addPAtk"));
+            d.setAddPDef(rs.getInt("addPDef"));
+            d.setAddMAtk(rs.getInt("addMAtk"));
+            d.setAddMDef(rs.getInt("addMDef"));
+            d.setAddAtkS(rs.getInt("addAtkS"));
+            d.setAddSta(rs.getInt("addSta"));
+            d.setAddStaR(rs.getInt("addStaR"));
+            d.setAddMPR(rs.getInt("addMPR"));
+            d.setAddCrit(rs.getInt("addCrit"));
+            
+            d.setBaseStr(rs.getInt("baseStr"));
+            d.setBaseAgi(rs.getInt("baseAgi"));
+            d.setBaseDex(rs.getInt("baseDex"));
+            d.setBaseCon(rs.getInt("baseCon"));
+            d.setBaseInt(rs.getInt("baseInt"));
+            d.setBaseWis(rs.getInt("baseWis"));
+            d.setBaseLuck(rs.getInt("baseLuck"));
+            
+            d.setBuffHP(rs.getInt("buffHP"));
+            d.setBuffMP(rs.getInt("buffMP"));
+            d.setBuffPAtk(rs.getInt("buffPAtk"));
+            d.setBuffPDef(rs.getInt("buffPDef"));
+            d.setBuffMAtk(rs.getInt("buffMAtk"));
+            d.setBuffMDef(rs.getInt("buffMDef"));
+            d.setBuffAtkS(rs.getInt("buffAtkS"));
+            d.setBuffSta(rs.getInt("buffSta"));
+            d.setBuffStaR(rs.getInt("buffStaR"));
+            d.setBuffMPR(rs.getInt("buffMPR"));
+            d.setBuffCrit(rs.getInt("buffCrit"));
+            
+            con.tutupKoneksi();
+            return d;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     public int validasi(String ID){
         int val = 0;
         try {
