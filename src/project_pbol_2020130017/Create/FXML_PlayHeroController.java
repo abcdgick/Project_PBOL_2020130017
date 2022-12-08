@@ -75,6 +75,7 @@ public class FXML_PlayHeroController implements Initializable {
     private final String landmark1 = "Dummy has been defeated!\n\nYou won the battle!!";
     private final String landmark2 = "In the dungeon, you lay sight on the figure you swore to defeat";
     private final String over = "";
+    private String textDmg;
     private boolean pause = false, used=false, used2=false;
     
     /**
@@ -96,7 +97,8 @@ public class FXML_PlayHeroController implements Initializable {
     private void fightKlik(ActionEvent event) {
         pause = false;
         freeze(ket1, true);
-        dialog.add(name+" attack "+enemy+"\n\n"+enemy+" lost "+Atk+" HP");
+        textDmg = String.format("%.2f", Atk);
+        dialog.add(name+" attack "+enemy+"\n\n"+enemy+" lost "+textDmg+" HP");
         nextDialog();
         serang(Atk);
         eturn(EAtk);
@@ -111,7 +113,8 @@ public class FXML_PlayHeroController implements Initializable {
         }else{
             pause = false;
             freeze(ket1, true);
-            dialog.add(name+" uses "+skill+"\n\n"+enemy+" lost "+Atk*3+" HP");
+            textDmg = String.format("%.2f", Atk*3);
+            dialog.add(name+" uses "+skill+"\n\n"+enemy+" lost "+textDmg+" HP");
             nextDialog();
             serang(Atk*3);
             used = true;
@@ -175,7 +178,7 @@ public class FXML_PlayHeroController implements Initializable {
         if(EHP > 0){
             double dmg = EAtk - Def;
             if(dmg < 0) dmg = 0;
-            String textDmg = String.format("%.2f", dmg);
+            textDmg = String.format("%.2f", dmg);
             dialog.add(enemy+" attack "+name+"\n\n"+name+" lost "+textDmg+" HP");
             double sisa = HP - dmg;
             if(sisa < 0){
