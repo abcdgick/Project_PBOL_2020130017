@@ -102,13 +102,16 @@ public class FXML_AddAgamaController implements Initializable {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Religion data has been updated",ButtonType.OK);
                 a.showAndWait();
                 txtReligionID.setEditable(true);
+                keluar();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "Religion hasn't been updated",ButtonType.OK);
             }
         } else if(MainMenuController.dtAgama.validasi(n.getIDAgama())<=0){
             if(MainMenuController.dtAgama.insert()){
-                Alert a = new Alert(Alert.AlertType.INFORMATION,"New birthsign has been created!",ButtonType.OK);
+                Alert a = new Alert(Alert.AlertType.INFORMATION,"New religion has been created!",ButtonType.OK);
                 a.showAndWait();
+                keluar();
+                
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR,"Religion creation has failed",ButtonType.OK);
                 a.showAndWait();
@@ -125,18 +128,21 @@ public class FXML_AddAgamaController implements Initializable {
         Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Go back to the Main Menu? All unsaved progress will be lost", ButtonType.YES,ButtonType.NO);
         a.showAndWait();
         if(a.getResult()==ButtonType.YES){
-            
-            stageMenu.show();
-            mediaPlayer.stop();
-            
-            music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
-            mediaPlayer = new MediaPlayer(music);
-            mediaPlayer.setVolume(volume);
-            mediaPlayer.play();
-            
-            Stage stage = (Stage) btnExit.getScene().getWindow();
-            stage.close();
+            keluar();
         }
+    }
+    
+    private void keluar(){
+        stageMenu.show();
+        mediaPlayer.stop();
+
+        music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
+        mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.play();
+
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
     
     public void udahAda(AgamaModel d){

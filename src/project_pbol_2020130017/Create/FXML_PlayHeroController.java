@@ -66,8 +66,8 @@ public class FXML_PlayHeroController implements Initializable {
     private ImageView imgEnemy;
     
     private int dis = 0;
-    private double HP, HPawal, MP, PAtk, PDef, MAtk, MDef, Atk, Def, Sta, StaR, MPR, Crit;
-    private double EHP, EMP, EAtk, EDef, ECrit;
+    private double HP, HPawal, MP, PAtk, PDef, MAtk, MDef, Atk, Def, Sta, StaR, MPR, Crit, gauge, gaugeAwal;
+    private double EHP, EHPawal, EAtk;
     private ArrayList<String> dialog = new ArrayList<>();
     private String name, skill, enemy;
     private final String ling1 = "The dummy stands menacingly", ling2 = "The wind is howling";
@@ -76,7 +76,7 @@ public class FXML_PlayHeroController implements Initializable {
     private final String landmark2 = "In the dungeon, you lay sight on the figure you swore to defeat";
     private final String over = "";
     private String textDmg;
-    private boolean pause = false, used=false, used2=false;
+    private boolean pause = false, used=false;
     
     /**
      * Initializes the controller class.
@@ -97,19 +97,28 @@ public class FXML_PlayHeroController implements Initializable {
     private void fightKlik(ActionEvent event) {
         pause = false;
         freeze(ket1, true);
-        textDmg = String.format("%.2f", Atk);
-        dialog.add(name+" attack "+enemy+"\n\n"+enemy+" lost "+textDmg+" HP");
+        double random = Math.random();
+        String crit = "";
+        double dmg;
+        if(random <= Crit/100){
+            dmg = Atk * 2;
+            crit = "It's a Crit!\n";
+        } else{
+            dmg = Atk;
+        }
+        textDmg = String.format("%.2f", dmg);
+        dialog.add(crit+name+" attack "+enemy+"\n\n"+enemy+" lost "+textDmg+" HP");
         nextDialog();
-        serang(Atk);
+        serang(dmg);
         eturn(EAtk);
     }
 
     @FXML
     private void skillKlik(ActionEvent event) {
-        if(skill.isEmpty()){
+        if(skill == null){
             textDialog.setText(name+" doesn't have any skill!");
-        } else if(used){
-            textDialog.setText(name+" had already used their skill!");
+        } else if(gauge <= 0){
+            textDialog.setText(name+" can't use skill anymore!");
         }else{
             pause = false;
             freeze(ket1, true);
@@ -117,7 +126,14 @@ public class FXML_PlayHeroController implements Initializable {
             dialog.add(name+" uses "+skill+"\n\n"+enemy+" lost "+textDmg+" HP");
             nextDialog();
             serang(Atk*3);
-            used = true;
+            gauge -= 100;
+            if(gauge <= 0){
+                gauge = 0;
+                barMP.setProgress(0);
+            } else{
+                gauge -= 100;
+                barMP.setProgress(gauge/gaugeAwal);
+            }
             eturn(EAtk);
         }
     }
@@ -126,7 +142,7 @@ public class FXML_PlayHeroController implements Initializable {
     private void itemKlik(ActionEvent event) {
         if(barHP.getProgress() == 1){
             textDialog.setText("You're at full HP\n\nHealing item isn't used");
-        } else{
+        } else if(!used){
             textDialog.setText(name+" used healing item!\n\n500 HP restored!");
             if(HP + 500 > HPawal){
                 HP = HPawal;
@@ -135,6 +151,9 @@ public class FXML_PlayHeroController implements Initializable {
                 HP = HP + 500;
                 barHP.setProgress(HP/HPawal);
             }
+            used = true;
+        } else{
+            textDialog.setText("Healing item had already been used!");
         }
     }
 
@@ -158,7 +177,7 @@ public class FXML_PlayHeroController implements Initializable {
     }
     
     private void serang(double dmg){
-        double sisa = barEnemy.getProgress() - dmg/EHP;
+        double sisa = barEnemy.getProgress() - dmg/EHPawal;
         if(sisa < 0){
             barEnemy.setProgress(0);
             EHP = 0;
@@ -172,6 +191,8 @@ public class FXML_PlayHeroController implements Initializable {
             barEnemy.setProgress(sisa);
             EHP -= dmg;
         }
+        System.out.println("Sisa: "+sisa);
+        System.out.println("EHP: "+EHP);
     }
     
     private void eturn(double EAtk){
@@ -279,6 +300,11 @@ public class FXML_PlayHeroController implements Initializable {
         if(PAtk > MAtk && PDef > MDef){
             textMP.setText("Stamina");
             barMP.setStyle("-fx-accent: orange");
+            gauge = Sta;
+            gaugeAwal = Sta;
+        } else {
+            gauge = MP;
+            gaugeAwal = MP;
         }
         
         name = disHero.getNamaHero();
@@ -307,7 +333,8 @@ public class FXML_PlayHeroController implements Initializable {
         dialog.add(name+" has only one goal: to kill Undyne the Undying\n\nTo beat her, "+name+" must first prove him/herself");
         dialog.add("Prove yourself worthy!");
         enemy = "Dummy";
-        EHP = 300;
+        EHP = 500;
+        EHPawal = 500;
         EAtk = 0;
         dialog.add(ling1);
     }
@@ -326,12 +353,14 @@ public class FXML_PlayHeroController implements Initializable {
         Image image = new Image(file.toURI().toString());
         imgEnemy.setImage(image);
         enemy = "Undyne the Undying";
-        EHP = 1000;
+        EHP = 2000;
+        EHPawal = 2000;
         barHP.setProgress(1);
         barMP.setProgress(1);
         barEnemy.setProgress(1);
+        gauge = gaugeAwal;
+        barMP.setProgress(1);
         used = false;
-        used2 = false;
         HP = HPawal;
         EAtk = 150;
         dialog.add(ling2);

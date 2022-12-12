@@ -195,19 +195,22 @@ public class FXML_AddKelasController implements Initializable {
         Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Go back to the Main Menu? All unsaved progress will be lost", ButtonType.YES,ButtonType.NO);
         a.showAndWait();
         if(a.getResult()==ButtonType.YES){
-            
-            stageMenu.show();
-            mediaPlayer.stop();
-            
-            music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
-            mediaPlayer.setVolume(volume);
-            mediaPlayer = new MediaPlayer(music);
-            mediaPlayer.setVolume(volume);
-            mediaPlayer.play();
-            
-            Stage stage = (Stage) btnExit.getScene().getWindow();
-            stage.close();
+            keluar();
         }
+    }
+    
+    private void keluar(){
+        stageMenu.show();
+        mediaPlayer.stop();
+
+        music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
+        mediaPlayer.setVolume(volume);
+        mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.play();
+
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
     
     @FXML
@@ -301,6 +304,7 @@ public class FXML_AddKelasController implements Initializable {
                 if(MainMenuController.dtKelas.insert()){
                     Alert a = new Alert(Alert.AlertType.INFORMATION,success,ButtonType.OK);
                     a.showAndWait();
+                    keluar();
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR,error,ButtonType.OK);
                     a.showAndWait();
@@ -309,6 +313,7 @@ public class FXML_AddKelasController implements Initializable {
                 if(MainMenuController.dtKelas.saveAll()){
                     Alert a = new Alert(Alert.AlertType.INFORMATION,success,ButtonType.OK);
                     a.showAndWait();
+                    keluar();
                 } else {
                     Alert a = new Alert(Alert.AlertType.ERROR,error,ButtonType.OK);
                     a.showAndWait();

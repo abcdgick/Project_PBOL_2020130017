@@ -111,6 +111,7 @@ public class FXML_AddTandaController implements Initializable {
                 Alert a = new Alert(Alert.AlertType.INFORMATION, "Birthsign data has been updated",ButtonType.OK);
                 a.showAndWait();
                 txtBirthsignID.setEditable(true);
+                keluar();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR, "Birthsign hasn't been updated",ButtonType.OK);
             }
@@ -118,6 +119,7 @@ public class FXML_AddTandaController implements Initializable {
             if(MainMenuController.dtTanda.insert()){
                 Alert a = new Alert(Alert.AlertType.INFORMATION,"New birthsign has been created!",ButtonType.OK);
                 a.showAndWait();
+                keluar();
             } else {
                 Alert a = new Alert(Alert.AlertType.ERROR,"Birthsign creation has failed",ButtonType.OK);
                 a.showAndWait();
@@ -134,18 +136,21 @@ public class FXML_AddTandaController implements Initializable {
         Alert a = new Alert(Alert.AlertType.CONFIRMATION,"Go back to the Main Menu? All unsaved progress will be lost", ButtonType.YES,ButtonType.NO);
         a.showAndWait();
         if(a.getResult()==ButtonType.YES){
-            
-            stageMenu.show();
-            mediaPlayer.stop();
-            
-            music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
-            mediaPlayer = new MediaPlayer(music);
-            mediaPlayer.setVolume(volume);
-            mediaPlayer.play();
-            
-            Stage stage = (Stage) btnExit.getScene().getWindow();
-            stage.close();
+            keluar();
         }
+    }
+    
+    private void keluar(){
+        stageMenu.show();
+        mediaPlayer.stop();
+
+        music = new Media(getClass().getResource("/project_pbol_2020130017/Menu/Menu.mp4").toExternalForm()); 
+        mediaPlayer = new MediaPlayer(music);
+        mediaPlayer.setVolume(volume);
+        mediaPlayer.play();
+
+        Stage stage = (Stage) btnExit.getScene().getWindow();
+        stage.close();
     }
     
     public void udahAda(TandaModel d){
